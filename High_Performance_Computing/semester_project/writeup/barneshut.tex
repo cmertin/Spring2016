@@ -1,0 +1,36 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[pdftex]{hyperref}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{float}
+
+\author{Christopher Mertin}
+\title{Distributed Barnes-Hut Algorithm: Planet Simulation}
+
+\begin{document}
+\begin{titlepage}
+\maketitle
+\thispagestyle{empty}
+\end{titlepage}
+
+\section*{Introduction}
+\input{intro.tex}
+
+\section*{Numerical Calculations}
+\input{numerics.tex}
+
+\section*{Barnes-Hut Algorithm}
+\input{algorithm.tex}
+
+\section*{Results}
+\input{results.tex}
+
+\begin{thebibliography}{99}
+\bibitem{barneshut}Josh Barnes and Piet Hut, {\em A Hierarchial $\mathcal{O}\left( N\log(N)\right)$ Force-Calculation Algorithm}, Nature {\bf 324} (4), (December 1986) 446-449
+\bibitem{code} Piet Hut and Jun Makino, {\em Moving Stars Around}, \url{http://www.artcompsci.org/}
+\bibitem{github}\textit{Barnes-Hut: \textsc{Dendro}}, \url{https://github.com/cmertin/dendro}
+\bibitem{milinda} Weerahannadige Milinda Shayamal Fernando, Personal Conversation, May 9, 2016
+\end{thebibliography}
+\end{document}

@@ -1,0 +1,96 @@
+
+N = 1
+Max Execution Time: 0.000504971 seconds
+Max Execution Time: 0.000494003 seconds
+Max Execution Time: 0.000447035 seconds
+Max Execution Time: 0.000517845 seconds
+Max Execution Time: 0.000530005 seconds
+Max Execution Time: 0.000480175 seconds
+Max Execution Time: 0.000506163 seconds
+Max Execution Time: 0.000499964 seconds
+Max Execution Time: 0.000458956 seconds
+Max Execution Time: 0.000571012 seconds
+
+N = 10
+Max Execution Time: 0.00175405 seconds
+Max Execution Time: 0.00514789 seconds
+Max Execution Time: 0.00158191 seconds
+Max Execution Time: 0.00176787 seconds
+Max Execution Time: 0.00295997 seconds
+Max Execution Time: 0.00231538 seconds
+Max Execution Time: 0.00172186 seconds
+Max Execution Time: 0.00170207 seconds
+Max Execution Time: 0.00155115 seconds
+Max Execution Time: 0.00184393 seconds
+
+N = 100
+Max Execution Time: 0.00472186 seconds
+Max Execution Time: 0.00351906 seconds
+Max Execution Time: 0.00224791 seconds
+Max Execution Time: 0.00363111 seconds
+Max Execution Time: 0.00795469 seconds
+Max Execution Time: 0.00332189 seconds
+Max Execution Time: 0.00358987 seconds
+Max Execution Time: 0.00359917 seconds
+Max Execution Time: 0.00391197 seconds
+Max Execution Time: 0.00357199 seconds
+
+N = 1,000
+Max Execution Time: 0.015353 seconds
+Max Execution Time: 0.026747 seconds
+Max Execution Time: 0.0254321 seconds
+Max Execution Time: 0.0270629 seconds
+Max Execution Time: 0.0212531 seconds
+Max Execution Time: 0.01511 seconds
+Max Execution Time: 0.0179582 seconds
+Max Execution Time: 0.015327 seconds
+Max Execution Time: 0.0101134 seconds
+Max Execution Time: 0.0671489 seconds
+
+N = 10,000
+Max Execution Time: 0.178771 seconds
+Max Execution Time: 0.177144 seconds
+Max Execution Time: 0.199765 seconds
+Max Execution Time: 0.194581 seconds
+Max Execution Time: 0.227367 seconds
+Max Execution Time: 0.182382 seconds
+Max Execution Time: 0.186985 seconds
+Max Execution Time: 0.180793 seconds
+Max Execution Time: 0.229102 seconds
+Max Execution Time: 0.183146 seconds
+
+N = 100,000
+Max Execution Time: 2.12966 seconds
+Max Execution Time: 1.44797 seconds
+Max Execution Time: 0.97405 seconds
+Max Execution Time: 0.967296 seconds
+Max Execution Time: 1.44464 seconds
+Max Execution Time: 1.10055 seconds
+Max Execution Time: 1.311 seconds
+Max Execution Time: 1.33508 seconds
+Max Execution Time: 0.967159 seconds
+Max Execution Time: 1.10916 seconds
+
+N = 1,000,000
+Max Execution Time: 9.12781 seconds
+Max Execution Time: 8.56383 seconds
+Max Execution Time: 8.80197 seconds
+Max Execution Time: 8.96471 seconds
+Max Execution Time: 8.8657 seconds
+Max Execution Time: 9.45713 seconds
+Max Execution Time: 8.50405 seconds
+Max Execution Time: 8.65857 seconds
+Max Execution Time: 8.48665 seconds
+Max Execution Time: 9.18965 seconds
+
+N = 10,000,000
+Max Execution Time: 97.0733 seconds
+Max Execution Time: 97.1592 seconds
+Max Execution Time: 97.4845 seconds
+Max Execution Time: 97.02 seconds
+Max Execution Time: 96.3113 seconds
+Max Execution Time: 97.0135 seconds
+Max Execution Time: 96.4629 seconds
+Max Execution Time: 97.052 seconds
+Max Execution Time: 97.0843 seconds
+Max Execution Time: 96.6564 seconds

@@ -1,0 +1,5 @@
+The N-body problem is important for many aspects of physics and scientific simulations. This is due to the fact that each particle interacts with every other type of particle, which results in an $\mathcal{O}\left( n^{2}\right)$ algorithm if you take the na\"{i}ve approach.
+
+There are alternative ways to approach these types of problems, one of which is known as the {\em Barnes-Hut Algorithm} \cite{barneshut}. While the original algorithm was sequential, modern day methods have parallelized this approach to be used with MPI for use in clusters.
+
+The problem with parallelizing this sort of algorithm is that it is difficult to build the tree efficiently in parallel. This was accomplished with the use of {\sc Dendro}. The actual force calculations themselves are embarassingly parallel as the position update has no dependencies. 

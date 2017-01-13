@@ -1,0 +1,41 @@
+MPI Ring
+========
+File: ring.cpp
+This is a distributed memory program that sends information around a "ring" in
+the network to all of the nodes. It sums up the value of the `node_id` from each
+node and goes around the loop N times. N is defined as the command line argument
+that is passed in when the program is run. If one isn't given, then it defaults
+to a single loop around the ring. To make this program, there is a makefile
+that has all the necessary flags and parameters for making it. You can make it
+with `make ring` which will make the executable `ring` from the source code.
+To run the program, simply type `mpirun -n num_nodes ./ring N` which will run
+it on the number of nodes that you define and loop around the ring N times.
+
+MPI+OpenMP Binary Search
+========================
+Files: search.cpp, bsearch.h
+This program implements and tests the binary search algorithm by implementing it
+in parallel with both MPI and OpenMP. The definition of the function is given in
+`bsearch.h` which is a templated function that uses iterators for the search. To
+run the code, you have to first define the parameters for the parallism, which
+are in the struct `parallelSettings` which is also defined in the `bsearch.h`
+file.
+
+This program is run for a given input array size, which is defined as a command
+line argument. It then takes that size and divides it by the number of nodes
+and then builds each array segment independently on each node. This is defined
+as `numPerNode` in the `parallelSettings` struct. It then performs the Binary
+Search for all of the keys and stores them in an array. If the key didn't exist,
+then it will store `-1` as the value in the array. After the search, it
+"cleans up the data" by taking any found indicies and adding a value to it which
+represents the "true index." For example, if node 2 found a key at index 5, it
+would then update that to be `5 + numPerNode` to get the value that it would
+have had in the array.
+
+It then performs an `MPI::Allgather` on this and gathers all of the indicies
+from each node. Then it returns that list of key indices back to where the
+function was called as a form of a vector of integers.
+
+To run the provided program, simply run `make search` and it will make the
+executable. Then, running `mpirun -n num_nodes ./search N` where N is the
+size of the array that you want. 

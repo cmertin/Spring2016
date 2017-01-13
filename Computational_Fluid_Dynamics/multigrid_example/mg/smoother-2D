@@ -1,0 +1,72 @@
+#! /usr/bin/octave -qf
+
+############ Several smoothers ######
+
+function y = SmootherRic(A,x,b,omega)	# Richardson iteration
+    r = b-A*x;
+    y = x + omega*r;
+endfunction
+
+function y = SmootherJac(A,x,b,omega)	# weighted Jacobi iteration
+    r = b-A*x;
+    M = diag(diag(A));
+    y = x + omega*(M\r);
+endfunction
+
+function y = SmootherGS(A,x,b)		# Gauss-Seidel iteration
+    r = b-A*x;
+    M = tril(A);
+    y = x + M\r;
+endfunction
+
+function y = SmootherSOR(A,x,b,omega)	# Successive OverRelaxation method (SOR)
+    r = b-A*x;
+    D = diag(diag(A));
+    E = D-tril(A);
+    M = (D-omega*E)/omega;
+    y = x + M\r;
+endfunction
+
+function y = SmootherSSOR(A,x,b,omega)	# Symmetric SOR
+    r = b-A*x;
+    D = diag(diag(A));
+    E = D-tril(A);
+    F = D-triu(A);
+    M = (D-omega*E)*inv(D)*(D-omega*F)/(omega*(2-omega));
+    y = x + M\r;
+endfunction
+
+########## Main program #############
+    
+n    = 47;
+
+v    = zeros(n*n,1);
+v(1) = 4;
+v(2) = -1;
+v(n+1) = -1;
+A    = toeplitz(v);
+for i=1:n-1
+A(i*n,i*n+1)=0;
+A(i*n+1,i*n)=0;
+endfor
+
+x_ex = rand(n*n,1);
+b    = A*x_ex;
+
+x = zeros(n*n,1);
+
+gsplot [0:n] [0:n] [-0.1:1.1] reshape(x_ex-x, n, n) with lines title "Initial Error"
+input("Press enter to start iterations");
+
+for i = 1:1000
+
+    x = SmootherRic(A,x,b,0.125);
+#    x = SmootherJac(A,x,b,1.0);
+#    x = SmootherGS(A,x,b);
+#    x = SmootherSOR(A,x,b,1.8);
+#    x = SmootherSSOR(A,x,b,1.8);
+     
+    gsplot [0:n] [0:n] [-0.1:1.1] reshape(x_ex-x, n, n) with lines title strcat("Error after ",int2str(i)," iteration(s)");
+    sleep (0.5);
+
+endfor

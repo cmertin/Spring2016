@@ -1,0 +1,17 @@
+[1456156454.989068] [tp012:26678:0]         sys.c:744  MXM  WARN  Conflicting CPU frequencies detected, using: 1300.00
+[1456156456.208306] [tp024:26513:0]         sys.c:744  MXM  WARN  Conflicting CPU frequencies detected, using: 1300.00
+[1456156456.232426] [tp014:26720:0]         sys.c:744  MXM  WARN  Conflicting CPU frequencies detected, using: 1300.00
+Number of nodes: 16
+Number of loops: 10
+Total: 1200
+Run time: 0.0309548 seconds
+Average time: 0.000193468 seconds
+Number of Sends: 160
+
+
+Testing for large array
+-----------------------
+N = 10000000
+Average time to send the large array: 0.00393932 seconds
+Size of the array: 240000000 bytes
+bytes/second: 6.09243e+10

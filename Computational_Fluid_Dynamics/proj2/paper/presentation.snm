@@ -1,0 +1,15 @@
+\beamer@slide {alg:navier_stokes}{4}
+\beamer@slide {fig:grid}{5}
+\beamer@slide {fig:stagg_1}{7}
+\beamer@slide {eq:full_p}{9}
+\beamer@slide {eq:F_p}{10}
+\beamer@slide {eq:F_l}{10}
+\beamer@slide {eq:drag}{11}
+\beamer@slide {eq:fd}{11}
+\beamer@slide {fig:p_vs_v}{14}
+\beamer@slide {fig:p_error}{15}
+\beamer@slide {fig:p_sep}{16}
+\beamer@slide {fig:fd_sub}{17}
+\beamer@slide {fig:fd_ratio}{18}
+\beamer@slide {fig:clearance}{19}
+\beamer@slide {fig:fdclear_fd}{20}

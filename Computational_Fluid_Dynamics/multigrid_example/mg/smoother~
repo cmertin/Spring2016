@@ -1,0 +1,65 @@
+#! /usr/bin/octave -qf
+
+############ Several smoothers ######
+
+function y = SmootherRic(A,x,b,omega)	# Richardson iteration
+    r = b-A*x;
+    y = x + omega*r;
+endfunction
+
+function y = SmootherJac(A,x,b,omega)	# weighted Jacobi iteration
+    r = b-A*x;
+    M = diag(diag(A));
+    y = x + omega*M\r;
+endfunction
+
+function y = SmootherGS(A,x,b)		# Gauss-Seidel iteration
+    r = b-A*x;
+    M = tril(A);
+    y = x + M\r;
+endfunction
+
+function y = SmootherSOR(A,x,b,omega)	# Successive OverRelaxation method (SOR)
+    r = b-A*x;
+    D = diag(diag(A));
+    E = D-tril(A);
+    M = (D-omega*E)/omega;
+    y = x + M\r;
+endfunction
+
+function y = SmootherSSOR(A,x,b,omega)	# Symmetric SOR
+    r = b-A*x;
+    D = diag(diag(A));
+    E = D-tril(A);
+    F = D-triu(A);
+    M = (D-omega*E)*inv(D)*(D-omega*F)/(omega*(2-omega));
+    y = x + M\r;
+endfunction
+
+########## Main program #############
+    
+n    = 1023;
+
+v    = zeros(n,1);
+v(1) = 2;
+v(2) = -1;
+A    = toeplitz(v);
+
+x_ex = rand(n,1);
+b    = A*x_ex;
+
+x = zeros(n,1);
+
+gplot [0:n] [-0.1:1.1] x_ex-x with lines title "Initial Error"
+sleep (3);
+for i = 1:1000
+
+#    x = SmootherRic(A,x,b,0.25);
+#    x = SmootherJac(A,x,b,1.00);
+     x = SmootherGS(A,x,b);
+#    x = SmootherSOR(A,x,b,1.8);
+#    x = SmootherSSOR(A,x,b,1.8);
+     
+    gplot [0:n] [-0.1:1.1] x_ex-x with lines title "Error"
+    sleep (0.5);
+endfor

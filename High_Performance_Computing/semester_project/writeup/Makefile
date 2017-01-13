@@ -1,0 +1,5 @@
+TEX=pdflatex
+
+paper: barneshut.tex intro.tex numerics.tex algorithm.tex results.tex
+	$(TEX) barneshut.tex
+	$(TEX) barneshut.tex

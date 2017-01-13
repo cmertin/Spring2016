@@ -1,0 +1,37 @@
+The gravitational force on one planet by another is given by
+
+\begin{align}
+\vec{F} &= G\frac{m_{1}m_{2}}{r^{2}}\hat{r}
+\intertext{we also know from Newton's laws that}
+\vec{F} &= m\vec{a}\label{eq:newton}
+\end{align}
+
+from these above two equations, we can figure out the force on a given planet by first calculating the force on it, and then the direction of the acceleration. This can be accomplished with something trivial such as the {\em forward-euler method} or some other basic time-stepping scheme. However, methods such as the forward-euler method perform horribly at conserving energy of the system.
+
+However, we can use another numerical method to achieve $\mathcal{O}\left(\Delta t^{3}\right)$ accuracy, and is much better in conserving energy, with a method known as the {\em Hermite Scheme}. Something such as Runge-Kutta-4 can give $\mathcal{O}\left(\Delta t^{4}\right)$ accuracy, but does take longer. As this is a simple test case, and the function itself was made modular in the code, the Hermite algorithm was chosen. This hermite algorithm was adapted from~\cite{code}.
+
+As we know from Equation~(\ref{eq:newton}), the acceleration is the second derivative of the position. The Hermite algorithm takes this further and calculates the {\em jerk} of the system, which is the time derivative of the acceleration. With this, we can get the position in the following order
+
+\begin{align}
+\frac{\text{d}^{2}\vec{r}_{i}}{\text{d}t^{2}} = \vec{a}_{i} &= G \sum_{\substack{j=1\\j\neq i}}^{N}\frac{m_{j}}{\left| \vec{r}_{j} - \vec{r}_{i} \right|^{3}}\left(\vec{r}_{j} - \vec{r}_{i}\right)\\
+\frac{\text{d}^{3}\vec{r}_{i}}{\text{d}t^{3}} = \vec{j}_{i} &= G \sum_{\substack{j=1\\j\neq i}}^{N}m_{j}\left[ \frac{\vec{v}_{j}-\vec{v}_{i}}{\left| \vec{r}_{j} - \vec{r}_{i} \right|^{3}} - 3\frac{(\vec{r}_{j}-\vec{r}_{i})\cdot (\vec{v}_{j} - \vec{v}_{i})}{\left| \vec{r}_{j} - \vec{r}_{i} \right|^{5}}(\vec{r}_{j} - \vec{r}_{i}) \right]\\
+\frac{\text{d}\vec{r}_{i}}{\text{d}t} = \vec{v}_{i}^{(n+1)} &= \vec{v}_{i}^{(n)} + \frac{1}{2}\left(\vec{a}_{i}^{(n)} + \vec{a}_{i}^{(n+1)}\right)\Delta t + \frac{1}{12}\left(\vec{j}_{i}^{(n)} - \vec{j}_{i}^{(n+1)}\right)\Delta t^{2}\label{eq:vel}\\
+\vec{r}_{i}^{(n+1)} &= \vec{r}_{i}^{(n)} + \frac{1}{2}\left(\vec{v}_{i}^{(n)} + \vec{v}_{i}^{(n+1)}\right)\Delta t + \frac{1}{12}\left(\vec{a}_{i}^{(n)} - \vec{a}_{i}^{(n+1)}\right)\Delta t^{2}\label{eq:pos}
+\end{align}
+
+So first the jerk and accleration need to be calculated, and then the velocity, followed by the position being updated. This needs to be done for each of the particles to have the desired result. The exponents in Equation~(\ref{eq:vel}) and Equation~(\ref{eq:pos}) denote the time step. $(n+1)$ is for the {\em new} time step, while $(n)$ is for the previous time step, and the subscript $i$ denoting the $i^{th}$ planet.
+
+\subsubsection*{Verifying Numerical Results}
+It was quite easy to verify to make sure the code was performing correctly. For the code to perform correctly, the {\em total energy} of the system had to be conserved as there were no outside forces. This relied on the {\em potential energy} and the {\em kinetic energy} of the system. 
+
+The potential energy $(U)$ can be calculated as
+
+\begin{align*}
+U &= -G\frac{m_{1}m_{2}}{\left| \vec{r}_{2} - \vec{r}_{1}\right|}
+\intertext{with $G$ being the gravitational constant, $m_{i}$ being the mass for the two planets, and $\vec{r}$ being their position. The kinetic energy $(T)$ can be represented as}
+T &= \frac{1}{2}mv^{2}\\
+\intertext{where $v$ is the velocity of a planet. In 3D, this is transformed into}
+T &= \frac{1}{2}M\left(v_{x}^{2} + v_{y}^{2} + v_{z}^{2}\right)
+\end{align*}
+
+The total energy of the system can be computed as $U + T$ at the start of the simulation, and again after the final time step. The total energy of the system should be conserved within some percent error.

@@ -1,0 +1,390 @@
+
+
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+		PERFORMING TEST 1
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+		TESTING GENERICSCAN
+
+	#######################
+	Running for N = 1000000
+	#######################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (0.07065 seconds)
+Performing Parallel Scan Operation........ DONE (0.07074 seconds)
+
+	########################
+	Running for N = 10000000
+	########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (0.72255 seconds)
+Performing Parallel Scan Operation........ DONE (0.72352 seconds)
+
+	#########################
+	Running for N = 100000000
+	#########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (4.26269 seconds)
+Performing Parallel Scan Operation........ DONE (2.82523 seconds)
+
+	##########################
+	Running for N = 1000000000
+	##########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (81.71503 seconds)
+Performing Parallel Scan Operation........ DONE (29.01874 seconds)
+
+
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+		PERFORMING TEST 2
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+		TESTING GENERICSCAN
+
+	#######################
+	Running for N = 1000000
+	#######################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (0.07140 seconds)
+Performing Parallel Scan Operation........ DONE (0.07113 seconds)
+
+	########################
+	Running for N = 10000000
+	########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (0.72468 seconds)
+Performing Parallel Scan Operation........ DONE (0.72462 seconds)
+
+	#########################
+	Running for N = 100000000
+	#########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (7.25894 seconds)
+Performing Parallel Scan Operation........ DONE (2.93201 seconds)
+
+	##########################
+	Running for N = 1000000000
+	##########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (82.02984 seconds)
+Performing Parallel Scan Operation........ DONE (29.11418 seconds)
+
+
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+		PERFORMING TEST 3
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+		TESTING GENERICSCAN
+
+	#######################
+	Running for N = 1000000
+	#######################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (0.07132 seconds)
+Performing Parallel Scan Operation........ DONE (0.07130 seconds)
+
+	########################
+	Running for N = 10000000
+	########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (0.72453 seconds)
+Performing Parallel Scan Operation........ DONE (0.72414 seconds)
+
+	#########################
+	Running for N = 100000000
+	#########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (7.27081 seconds)
+Performing Parallel Scan Operation........ DONE (2.91102 seconds)
+
+	##########################
+	Running for N = 1000000000
+	##########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (82.19713 seconds)
+Performing Parallel Scan Operation........ DONE (29.19933 seconds)
+
+
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+		PERFORMING TEST 4
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+		TESTING GENERICSCAN
+
+	#######################
+	Running for N = 1000000
+	#######################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (0.07095 seconds)
+Performing Parallel Scan Operation........ DONE (0.07096 seconds)
+
+	########################
+	Running for N = 10000000
+	########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (0.72396 seconds)
+Performing Parallel Scan Operation........ DONE (0.72387 seconds)
+
+	#########################
+	Running for N = 100000000
+	#########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (4.24859 seconds)
+Performing Parallel Scan Operation........ DONE (2.88803 seconds)
+
+	##########################
+	Running for N = 1000000000
+	##########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (81.97603 seconds)
+Performing Parallel Scan Operation........ DONE (28.87760 seconds)
+
+
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+		PERFORMING TEST 5
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+		TESTING GENERICSCAN
+
+	#######################
+	Running for N = 1000000
+	#######################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (0.07469 seconds)
+Performing Parallel Scan Operation........ DONE (0.07136 seconds)
+
+	########################
+	Running for N = 10000000
+	########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (0.72887 seconds)
+Performing Parallel Scan Operation........ DONE (0.72808 seconds)
+
+	#########################
+	Running for N = 100000000
+	#########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (7.28260 seconds)
+Performing Parallel Scan Operation........ DONE (2.89908 seconds)
+
+	##########################
+	Running for N = 1000000000
+	##########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (81.96327 seconds)
+Performing Parallel Scan Operation........ DONE (29.16156 seconds)
+
+
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+		PERFORMING TEST 6
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+		TESTING GENERICSCAN
+
+	#######################
+	Running for N = 1000000
+	#######################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (0.07121 seconds)
+Performing Parallel Scan Operation........ DONE (0.07110 seconds)
+
+	########################
+	Running for N = 10000000
+	########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (0.72097 seconds)
+Performing Parallel Scan Operation........ DONE (0.72119 seconds)
+
+	#########################
+	Running for N = 100000000
+	#########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (7.21942 seconds)
+Performing Parallel Scan Operation........ DONE (2.91735 seconds)
+
+	##########################
+	Running for N = 1000000000
+	##########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (81.98406 seconds)
+Performing Parallel Scan Operation........ DONE (29.26779 seconds)
+
+
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+		PERFORMING TEST 7
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+		TESTING GENERICSCAN
+
+	#######################
+	Running for N = 1000000
+	#######################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (0.07122 seconds)
+Performing Parallel Scan Operation........ DONE (0.07109 seconds)
+
+	########################
+	Running for N = 10000000
+	########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (0.42547 seconds)
+Performing Parallel Scan Operation........ DONE (0.42339 seconds)
+
+	#########################
+	Running for N = 100000000
+	#########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (7.23184 seconds)
+Performing Parallel Scan Operation........ DONE (2.91783 seconds)
+
+	##########################
+	Running for N = 1000000000
+	##########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (81.89161 seconds)
+Performing Parallel Scan Operation........ DONE (29.17447 seconds)
+
+
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+		PERFORMING TEST 8
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+		TESTING GENERICSCAN
+
+	#######################
+	Running for N = 1000000
+	#######################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (0.07150 seconds)
+Performing Parallel Scan Operation........ DONE (0.07163 seconds)
+
+	########################
+	Running for N = 10000000
+	########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (0.72526 seconds)
+Performing Parallel Scan Operation........ DONE (0.72537 seconds)
+
+	#########################
+	Running for N = 100000000
+	#########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (4.30348 seconds)
+Performing Parallel Scan Operation........ DONE (2.88502 seconds)
+
+	##########################
+	Running for N = 1000000000
+	##########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (82.02363 seconds)
+Performing Parallel Scan Operation........ DONE (29.13785 seconds)
+
+
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+		PERFORMING TEST 9
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+		TESTING GENERICSCAN
+
+	#######################
+	Running for N = 1000000
+	#######################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (0.07124 seconds)
+Performing Parallel Scan Operation........ DONE (0.07080 seconds)
+
+	########################
+	Running for N = 10000000
+	########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (0.42272 seconds)
+Performing Parallel Scan Operation........ DONE (0.42160 seconds)
+
+	#########################
+	Running for N = 100000000
+	#########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (7.23078 seconds)
+Performing Parallel Scan Operation........ DONE (2.93588 seconds)
+
+	##########################
+	Running for N = 1000000000
+	##########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (56.20052 seconds)
+Performing Parallel Scan Operation........ DONE (27.62410 seconds)
+
+
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+		PERFORMING TEST 10
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+		TESTING GENERICSCAN
+
+	#######################
+	Running for N = 1000000
+	#######################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (0.07119 seconds)
+Performing Parallel Scan Operation........ DONE (0.07118 seconds)
+
+	########################
+	Running for N = 10000000
+	########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (0.72316 seconds)
+Performing Parallel Scan Operation........ DONE (0.72616 seconds)
+
+	#########################
+	Running for N = 100000000
+	#########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (7.25220 seconds)
+Performing Parallel Scan Operation........ DONE (2.87605 seconds)
+
+	##########################
+	Running for N = 1000000000
+	##########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (82.09708 seconds)
+Performing Parallel Scan Operation........ DONE (28.81592 seconds)

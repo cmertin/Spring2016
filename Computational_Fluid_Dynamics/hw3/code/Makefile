@@ -1,0 +1,12 @@
+CC = g++
+CFLAGS = -O3 --std=c++11 -Wno-unused-result
+
+
+hw3: hw3.cpp Matrix.h Dimensions.h Output.h Solve.h
+	$(CC) $(CFLAGS) -o hw3 hw3.cpp
+
+mat: mat_test.cpp
+	$(CC) $(CFLAGS) -o mat_test mat_test.cpp
+
+clean:
+	rm -rf hw3 mat_test *.dat *.pdf *~ \#*

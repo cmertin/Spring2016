@@ -1,0 +1,89 @@
+\documentclass[addpoints]{exam}
+\usepackage{amsmath,amsthm,amssymb,url}
+\usepackage{cancel}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{upgreek}
+\usepackage{bm}
+\usepackage{units}
+\usepackage[pdftex]{hyperref}
+\usepackage{tikz}
+\usepackage{subcaption}
+\usetikzlibrary{shapes,snakes}
+
+\def\checkmark{\hspace{.5em}\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
+\DeclareMathOperator*{\pprime}{\prime \prime}
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+\newcommand{\BigO}[1]{\mathcal{O}\left( #1\right)}
+\newcommand{\D}[1]{\left. #1 \right|_{i}^{n}}
+\newcommand{\C}[1]{\cancel{ #1}}
+\newcommand{\DC}[1]{\C{\D{ #1}}}
+\newcommand{\Dx}{\Delta x}
+\newcommand{\Dy}{\Delta y}
+\newcommand{\Dt}{\Delta t}
+\newcommand{\Dtp}{\Delta t^{\prime}}
+
+
+\newtheorem{lemma}{Lemma}[section]
+\newcommand{\var}{\text{Var}}
+\title{ME EN 6720: Homework 3}
+\date{Due Date: March 21, 2016}
+\author{Christopher Mertin}
+\begin{document}
+\maketitle
+%\begin{center}
+%\fbox{\fbox{\parbox{5.5in}{\centering
+%This assignment has \numquestions\ questions, for a total of \numpoints\
+%points.
+%Unless otherwise specified, complete and reasoned arguments will be
+%expected for all answers. 
+%}}}
+%\end{center}
+
+\qformat{Question \thequestion: \thequestiontitle\dotfill}
+\pointname{}
+\bonuspointname{}
+\pointformat{[\bfseries\thepoints]}
+
+\printanswers
+
+
+
+\begin{questions}
+\titledquestion{Numerical Methods and the Vorticity-Streamfunction}
+Consider the flow in a lid driven cavity illustrated in the figure below. The cavity is square and flow in the cavity is driven by an upper plate moving at a constant velosity of $U$. The Reynolds number for the flow is $R_{e} = Uw/\nu = 100$. Solve for the steady state flow in the cavity using the vorticity-streamfunction method outlined in Lecture 12 (also see Ferziger pg. 181 and Tannehill {\em et. al}, pg. 650). Construct a second order finite difference solution for the problem (for both $\omega$ and $\Psi$) and solve it using the following schemes:
+\begin{enumerate}
+\item Jacobi Iterations
+\item Gauss-Seidel
+\item Gauss-Seidel with Successive Over-Relaxations ({\sc Sor})
+\item Gauss-Seidel with a 1-level nested Multigrid Method
+\end{enumerate}
+
+For {\bf extra credit}, use a solver package for the following:
+\begin{enumerate}
+\setcounter{enumi}{4}
+\item Preconditioned Conjugate Gradient Method ({\sc Pcg})
+\item Generalized Minimal Residual Method ({\sc Gmres})
+\end{enumerate}
+
+Use a uniform mesh to solve your problem with $N_{x}=N_{y}=50$ points in the horizontal $x$ and vertical $y$ directions respectively. Start the iterations with $u(x,y)=v(x,y)=0$ (you can also explore using $u(x,y)=U$ and $v(x,y)=0$). For a fixed convergence criteria (on the find grid for multigrid methods), which scheme converges fastest? How do all the schemes compare to each other (measured by performance)? What is the optimum value of the relaxation coefficient for the {\sc Sor} scheme? Present your results by plotting the streamlines for each scheme overlaid on a filled contour (or pseudo color) plot of the vorticity in the cavity. Also include a table comparing the number of iterations and total execution times for each method along with a short discussion. If you do the extra credit, with the {\sc Pcg} and {\sc Gmres} methods, report at least the minimum total time.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=.5\textwidth]{fig1.png}
+\end{figure}
+
+\end{questions}
+
+%\begin{thebibliography}{99}
+%\end{thebibliography}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

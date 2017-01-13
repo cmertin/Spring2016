@@ -1,0 +1,29 @@
+Parallel Quicksort
+==================
+Files: quicksort.cpp, point.h
+This program uses OpenMP to make quicksort faster. To compile the program, you
+can run `make sort` and it will make it with the proper optimization and compile
+flags to get better performance. The you can simply run the created executable
+to run the program. If no size of the array is given, it will default to
+1 million elements, though you can run the program as
+`./quicksort num_elements` to choose the number of elements that you want it to
+run for. It uses `std::rand()` to randomly fill the array before sorting. The
+output from when I ran this can be found in `output_sort.dat` in the same
+directory.
+
+Generic Scan
+============
+Files: genericScan.cpp, vector.h
+The file `vector.h` implements a generic templated class for 3-dimensional
+vectors, and includes generalized vector arithmetic such that it can be used
+with `GenericScan`. The function `GenericScan` performs a generalized scan
+operation for a given array. It implements it in place by utilizing upsweep
+and downsweep algorithms such that there isn't any memory overhead. To run it,
+you simply run `make scan` and it will make the executable `genericScan` with
+the appropriate flags. To run `genericScan` you simply need to run
+`genericScan num_elements` which if `num_elements` isn't given it will default
+to a size of 1,000,000. genericScan also implements a general version for
+testing with 300 million elements for 1d and 3d and reports the time it takes
+for those as well. It is stored in the last if statement in the main function,
+which is currently set to `false`. To run it, simply change that if statement to
+`true` and it will run it.

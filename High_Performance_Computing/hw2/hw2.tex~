@@ -1,0 +1,390 @@
+\documentclass[addpoints]{exam}
+\usepackage{amsmath,amsthm,amssymb,url}
+
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{float}
+
+\usepackage[pdftex]{hyperref}
+\usepackage{tikz}
+
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+\newcommand{\BigO}[1]{\mathcal{O}\left( #1\right)}
+
+
+\newtheorem{lemma}{Lemma}[section]
+\newcommand{\var}{\text{Var}}
+\title{CS 6230: Homework 2}
+\date{Due Date: February 7, 2016}
+\author{Christopher Mertin}
+\begin{document}
+\maketitle
+%\begin{center}
+%\fbox{\fbox{\parbox{5.5in}{\centering
+%This assignment has \numquestions\ questions, for a total of \numpoints\
+%points.
+%Unless otherwise specified, complete and reasoned arguments will be
+%expected for all answers. 
+%}}}
+%\end{center}
+
+\qformat{Question \thequestion: \thequestiontitle\dotfill \textbf{[\totalpoints]}}
+\pointname{}
+\bonuspointname{}
+\pointformat{[\bfseries\thepoints]}
+
+\printanswers
+
+
+
+\begin{questions}
+
+
+\titledquestion{Vector-Vector Outer Product}[20]
+Given two vectors $\vec{x},\vec{y}\in\mathbb{R}^{n\times 1}$, we want to compute their {\em outer product} $\mathbf{A}=\vec{x}\bigotimes \vec{y}\in \mathbb{R}^{n\times n}$, defined by $A_{i,j}=x_{i}y_{j}$. Give the work-depth pseudocode for this problem. Derive the work, depth, and parallelism as a function of $n$.
+
+\begin{solution}
+The Pseudocode for calculating the outer product between two vectors can be seen in Algorithm~\ref{alg:outer_prod}. From the work/depth model, the work would be defined as $\BigO{n^{2}}$ as it's performing $n^{2}$ computations to build $\mathbf{A}$. However, the depth would be $\BigO{1}$ as there is no dependencies on any of the computations. In other words, with at least $n^{2}$ CPUs, it would be possible to finish it in a single clock cycle.
+\begin{algorithm}[H]
+\caption{Vector-Vector Outer Product($\mathbf{A}, \vec{x}, \vec{y}$)}
+\begin{algorithmic}[1]
+\REQUIRE{$x,y\in\mathbb{R}^{n\times 1},\ \mathbf{A}\in\mathbb{R}^{n\times n}$}
+\ENSURE{$\mathbf{A}\in\mathbb{R}^{n\times n}$}
+\FOR{$i=0$ \TO $n-1$}
+  \FOR{$j=0$ \TO $n-1$}
+      \STATE{$A[i\times n + j] = x[i] \times y[j]$}
+  \ENDFOR
+\ENDFOR
+\RETURN{$\mathbf{A}$}
+\end{algorithmic}
+\label{alg:outer_prod}
+\end{algorithm}
+
+The parallelism $P(n)$ is defined as the work over depth, which is $\BigO{n^{2}}$ since the work is $\BigO{n^{2}}$ and the depth is $\BigO{1}$.
+
+\end{solution}
+
+\newpage
+
+\titledquestion{Matrix Forward Substitution}[20]
+Let $\mathbf{A}$ be a $n\times n$ lower triangular matrix ({\em i.e.} $A_{i,j}=0$ if $j>i$) such that $A_{i,i}\neq 0$ for $1\leq i\leq n$, and let $\vec{b}$ be a $n$-dimensional vector. Consider the forward-substitution algorithm for solving $\mathbf{A}\vec{x}=\vec{b}$ for $\vec{x}$:
+
+\begin{align*}
+x_{1} &= \frac{1}{A_{1,1}}b_{1}\\
+x_{i} &= \frac{1}{A_{i,i}}\left(b_{i}-\sum_{j=1}^{i-1}A_{i,j}x_{j}\right)\quad i=2,\ldots,n
+\end{align*}
+
+Determine the work and depth of the algorithm. State a {\sc Pram} version of this algorithm and derive its time and work complexity as a function of the input size $n$ and the number of processors $p$. {\em Optional}: Suggest ways to improve the complexity of this algorithm. 
+
+\begin{solution}
+In the sequential case, the work/depth model would have work $\BigO{n^{2}}$ and depth being $\BigO{n}$ since (a) there are $\BigO{n^{2}}$ computations that need to be made, and (b) there are $\BigO{n}$ dependent computations.
+
+Parallelizing this algorithm is difficult due to the multiple dependencies at each row of the matrix, though it can be seen in Algorithm~\ref{alg:par_for}. %The idea comes from \cite{parallel_forward} which used OpenMP for solving an upper triangular system, which I used as a hint to build for solving the lower triangular system. 
+
+\begin{algorithm}[H]
+\caption{Parallel Forward Substitution($\mathbf{A}, \vec{x}, \vec{b}$)}
+\begin{algorithmic}[1]
+\REQUIRE{$\mathbf{A}\in \mathbb{R}^{n\times n}$ and $\vec{x}, \vec{b}\in\mathbb{R}^{n\times 1}$}
+\FOR{$i=1$ \TO $n-1$}
+    \STATE{\#pragma omp parallel {\bf for} shared($\mathbf{A}$)}
+    \FOR{$j=0$ \TO $i-1$}
+        \STATE{$x_{j} = b_{j} - A_{j,i-1}\times x_{i-1}$}
+    \ENDFOR
+\ENDFOR
+\end{algorithmic}
+\label{alg:par_for}
+\end{algorithm}
+
+Using this algorithm gives the parallel version of the code which speeds up the computation time. The work is still $\BigO{n^{2}}$ but the depth is $\BigO{n}$ now.
+
+The time complexity can be found by figuring out the total number of computations. The for loop in line 3 will have $\BigO{\log\left(\frac{n}{p}\right)}$ calculations by making it a reduction, and it will be called $n$ times, making the time complexity $\BigO{n\log\left(\frac{n}{p}\right)}$.
+
+\end{solution}
+
+\newpage
+
+\titledquestion{Matrix-Vector Multiplication}[20]
+Consider the {\em matrix-vector} multiplication problem $\vec{y} = \mathbf{A}\vec{x}$ on a {\sc Pram} machine. For {\sc Pram}, we discussed an algorithm that uses row-wise partitioning of $\mathbf{A}$ and $\vec{y}$. This time of partitioning is called {\em one-dimensional}, because partitions run across one dimension of the matrix. State a {\sc Pram} algorithm that uses a two-dimensional partitioning of the matrix. Derive the complexity ($T(n,p)$ and $W(n,p)$) and the speedup of the algorithm. Is your algorithm work efficient, assuming $W_{\text{sequential}}(n)=\BigO{n^{2}}$?
+
+\begin{solution}
+The two-dimensional partitioning is equivalent to giving one element of $\mathbf{A}$ to each processor. The algorithm can be seen in Algorithm~\ref{alg:mat_vec}
+
+\begin{algorithm}[H]
+\caption{Matrix Vector Multiplication($\mathbf{A}$, $\vec{x}$, $\vec{y}$)}
+\begin{algorithmic}[1]
+\REQUIRE{$\mathbf{A}\in\mathbb{R}^{n\times n}$ and $\vec{x}, \vec{y}\in\mathbb{R}^{n\times 1}$}
+\STATE{\#pragma omp parallel {\bf for} num\_threads($n$)}
+\FOR{$i=0$ \TO $n-1$}
+    \STATE{\#pragma omp parallel {\bf for} num\_threads($n$)}
+    \FOR{$j=0$ \TO $n-1$}
+        \STATE{$y_{i} = y_{i} + A_{i,j}\times x_{j}$}
+    \ENDFOR
+\ENDFOR
+\end{algorithmic}
+\label{alg:mat_vec}
+\end{algorithm}
+
+In using Algorithm~\ref{alg:mat_vec}, the inner most loop can take $\BigO{\log\left(\frac{n}{p}\right)}$ computations if you make it into a reduction. The outer loop is completely independent on the values in the other rows of $\mathbf{A}$, so it's time complexity can be $\BigO{1}$ for $n^{2}$ processors. This makes the overall time complexity as being $\BigO{\log\left(\frac{n}{p}\right)}$. The work is $\BigO{n^{2}}$ as you have to perform $n^{2}$ computations to multiply the matrix and vector.
+
+An algorithm is defined as being {\em work efficient} if the work complexity is the same for both the serial and parallel case. Therefore, this algorithm is work efficient as you don't need to do more work to parallelize this algorithm.
+\end{solution}
+
+\newpage
+
+\titledquestion{Generic Scan}[20]
+Implement an in-place generic scan operation in \verb~C++~ using OpenMP (no MPI). The signature of your function should be similar to
+
+\verb~void genericScan(void *X, size_t n, size_t l, void (*oper)(void *x1, void *x2));~
+
+You may change the interface to improve performance if you wish. Give an example in which each element in the input array \verb~X~ is a three-dimensional double precision vector and the binary operator is the vector addition. Your code should compile using GNU or Intel compilers on x86 platforms. Please report wallclock times for summing (a) 1D and (b) 3D double-precision vectors. The input of the array should be 300M keys long. Write a driver routine called scan that takes one argument, the size of the array to be scanned (initialized randomly). In the write-up, give pseudocode for your algorithm, and report wall clock time/core/$n$ results for $n =$ 1M, 10M, 100M, and 1B elements, using up to one node on Tangent (no MPI). Report weak and strong scaling results.
+
+\begin{solution} 
+Table~\ref{table:300m_scan} shows the results for running \verb~GenericScan~ on 16 cores and $n=300,000,000$. The test was performed for 10 different instances for both a 1D and 3D vector for each element of the array, and then the average was taken from each of the setups to get the average runtime for each instance. Each value of \verb~X~ was created with the use of \verb~std::rand()~ function, where the seed was changed each run to a value based on the system time. The raw output for the 300 million case can be found in {\tt output\_scan\_300M.dat}.
+
+Table~\ref{table:gen_scan} shows the results for sequentially running scan on a 3D vector sequentially for each case from 1 million to 1 billion for both sequential and parallel. The raw output for these cases can be found in {\tt output\_scan.dat} which has all the results for the cases from 1 million to 1 billion.
+
+From these tables, the weak and strong scaling can be calculated. {\em Strong scaling} is defined for the case where the problem size stays fixed but the number of processing elements are increased and can be calculated by
+
+\begin{align}
+\text{Strong Scaling} &= \frac{t_{1}}{N\times t_{N}}\times 100\%\label{eq:strong}
+\end{align}
+
+where $t_{1}$ is the time it takes the process to complete with one processor, and $t_{N}$ is the time with $N$ processors. 
+
+Weak scaling on the other hand looks at the direct scalability of the code by just dividing the sequential time by the parallel time, as seen by
+
+\begin{align}
+\text{Weak Scaling} &= \frac{t_{1}}{t_{N}}\times 100\%\label{eq:weak}
+\end{align}
+
+The results for strong and weak scaling can be found in their respective tables.
+
+\begin{algorithm}[H]
+\caption{GenericScan($A$)}
+\begin{algorithmic}[1]
+\REQUIRE{$A\in\mathbb{R}^{n\times 1}$}
+\FOR{$i=0$ \TO $\log_{2}(A.size())-2$}
+    \STATE{\#pragma omp parallel {\bf for}}
+    \FOR{$j=0$ \TO $A.size()-1$ by $2^{i+1}$}
+        \STATE{$A\left[j+2^{i+1}-1\right] = A\left[j + 2^{i} - 1\right] + A\left[j + 2^{i+1}-1\right]$}
+    \ENDFOR
+\ENDFOR
+\COMMENT{Upsweep}
+
+\FOR{$i=\log_{2}(A.size())-1$ \TO 1}
+    \STATE{\#pragma omp parallel {\bf for}}
+    \FOR{$j=0$ \TO $A.size()$ by $2^{i}$}
+        \STATE{$A\left[j+2^{i}+i-1\right] = A\left[ j + 2^{i}-1\right] + A\left[ j + 2^{i+1} - 1\right]$}
+    \ENDFOR
+\ENDFOR
+\COMMENT{Downsweep}
+\end{algorithmic}
+\end{algorithm}
+
+\begin{table}[H]
+\centering
+\caption{1D and 3D Vectors {\tt GenericScan} runtime ($n=300,000,000$)}
+\begin{tabular}{l | c c c c }
+\hline\hline
+Trial & 1D Sequential & 1D Parallel & 3D Sequential & 3D Parallel\\
+\hline
+1 & \phantom{1}9.507 & 3.508 & 21.746 & 8.803\\
+2 & \phantom{1}9.514 & 3.518 & 21.899 & 8.635\\
+3 & \phantom{1}9.530 & 3.546 & 21.684 & 8.741\\
+4 & \phantom{1}9.471 & 3.536 & 21.806 & 8.600\\
+5 & \phantom{1}9.634 & 3.509 & 17.402 & 8.812\\
+6 & \phantom{1}9.571 & 3.493 & 21.793 & 8.758\\
+7 & 10.312 & 3.589 & 19.660 & 8.697\\
+8 & 10.304 & 3.559 & 19.901 & 8.754\\
+9 & \phantom{1}9.507 & 3.527 & 21.675 & 8.754\\
+10 & \phantom{1}9.494 & 3.555 & 17.342 & 8.763\\
+\hline
+Average: & 9.684 & 3.534 & 20.491 & 8.733\\
+\hline
+Strong Scaling: & 17.127 & & 14.665\\
+Weak Scaling: & 274.0 & & 234.6\\
+\hline\hline
+\multicolumn{5}{l}{{\scriptsize $\dagger$ Given values are in seconds}}
+\end{tabular}
+\label{table:300m_scan}
+\end{table}
+
+
+\begin{table}[H]
+\centering
+\caption{{\tt GenericScan} for Sequential and Parallel}
+\begin{tabular}{l | c c c c | c c c c}
+\hline\hline
+& \multicolumn{4}{c}{Sequential} &  \multicolumn{4}{c}{Parallel}\\
+Trial & $10^{6}$ & $10^{7}$ & $10^{8}$ & $10^{9}$ & $10^{6}$ & $10^{7}$ & $10^{8}$ & $10^{9}$ \\
+\hline
+1 & 0.071 & 0.723 & \phantom{1}4.263 & 81.715 & 0.071 & 0.724 & 2.825 & 29.019\\
+2 & 0.071 & 0.725 & \phantom{1}7.259 & 82.030 & 0.071 & 0.725 & 2.932 & 29.114\\
+3 & 0.071 & 0.725 & \phantom{1}7.271 & 82.197 & 0.071 & 0.724 & 2.911 & 29.199\\
+4 & 0.071 & 0.724 & \phantom{1}4.249 & 81.976 & 0.071 & 0.724 & 2.888 & 28.878\\
+5 & 0.075 & 0.729 & \phantom{1}7.283 & 81.963 & 0.071 & 0.728 & 2.899 & 29.162\\
+6 & 0.071 & 0.721 & \phantom{1}7.219 & 81.894 & 0.071 & 0.721 & 2.917 & 29.268\\
+7 & 0.071 & 0.425 & \phantom{1}7.232 & 81.892 & 0.071 & 0.423 & 2.918 & 29.174\\
+8 & 0.072 & 0.725 & \phantom{1}4.303 & 81.892 & 0.072 & 0.725 & 2.885 & 29.138\\
+9 & 0.071 & 0.423 & \phantom{1}7.231 & 56.201 & 0.071 & 0.422 & 2.936 & 27.624\\
+10 & 0.071 & 0.723 & \phantom{1}7.252 & 82.097 & 0.071 & 0.726 & 2.876 & 28.816\\
+\hline
+Average: & 0.072 & 0.664 & 6.356 & 79.399 & 0.071 & 0.664 & 2.899 & 28.939\\
+\hline
+Strong Scaling: & 6.286 & 6.250 & 13.704 & 17.148\\
+Weak Scaling: & 100.6 & 100.0 & 219.3 & 274.4\\
+\hline\hline
+\multicolumn{5}{l}{{\scriptsize $\dagger$ Given values are in seconds}}
+\end{tabular}
+\label{table:gen_scan}
+\end{table}
+\end{solution}
+
+\newpage
+
+\titledquestion{Parallel Quicksort}[20]
+Parallelize your quicksort implementation from {\em Assignment 1} using OpenMP. In the write-up, give pseudocode for your algorithm, and report wall clock time/core/$n$ results for $n=$ 1M, 10M, 100M, and 1B elements, using up to one node on Tangent (no MPI). Report weak and strong scaling results.
+
+\begin{solution}
+I was unable to parallelize the algorithm that I had implemented in Assinment 1, so I changed it to a different quicksort algorithm \cite{qsort} which was easier to parallelize. The function call is the same, though it's the sorting part that was changed. This made it easier to parallelize. The pseudocode for this algorithm can be found in Algorithm~\ref{alg:qsort}.
+
+In testing the algorithms, I opted to run 10 different trials for each of the algorithms, and also run each array on \verb~std::sort()~ as well to see how my sort funciton comapres to the \verb~std::sort()~ in \verb~C++~. Table~\ref{table:qsort_seq} shows the results for the sequential implementation of quicksort, Table~\ref{table:qsort_parallel} is the parallel version of quicksort, and Table~\ref{table:sort} details the results from \verb~std::sort()~. The sort operation was performed with a list of integers for each given value of $n$, and the array was formed with the use of \verb~std::rand()~ to generate the values. The code was ran on Tangent with a single node and used 24 cores. The raw output from these runs can be found in {\tt output\_quicksort.dat} which has all this information. Table~\ref{table:qsort_scale} reports the scalability of the algorithm for the different values of $n$.
+
+\begin{table}[H]
+\centering
+\caption{Quicksort Scalability}
+\begin{tabular}{ l | c c c c}
+\hline\hline
+& $10^{6}$ & $10^{7}$ & $10^{8}$ & $10^{9}$\\
+\hline
+Strong Scalability: & 4.999 & 5.090 & 5.398 & 5.733\\
+Weak Scalability: & 119.978 & 122.165 & 129.561 & 137.591\\
+\hline\hline
+\end{tabular}
+\label{table:qsort_scale}
+\end{table}
+
+\begin{algorithm}[H]
+\caption{Quicksort($A$, $low$, $high$)}
+\begin{algorithmic}[1]
+\REQUIRE{$A\in\mathbb{R}^{n\times 1}$, $low$, $high$}
+\STATE{$lowTemp = low$}
+\STATE{$highTemp = high$}
+\STATE{$midPoint = A\left[\frac{low+high}{2}\right]$}
+\WHILE{$lowTemp\leq highTemp$}
+  \WHILE{$A[lowTemp] < midPoint$}
+      \STATE{$lowTemp = lowTemp + 1$}
+  \ENDWHILE
+  \WHILE{$A[highTemp] > midPoint$}
+      \STATE{$highTemp = highTemp - 1$}
+  \ENDWHILE
+  \IF{$lowTemp \leq highTemp$}
+     \STATE{$\text{swap}(A[lowTemp], A[highTemp])$}
+     \STATE{$lowTemp = lowTemp + 1$}
+     \STATE{$highTemp = highTemp - 1$}
+  \ENDIF
+\ENDWHILE
+\STATE{\#pragma omp parallel sections}
+\STATE{\#pragma omp section}
+\IF{$low < highTemp$}
+   \STATE{Quicksort($A$, $low$, $highTemp$)}
+\ENDIF
+\STATE{\#pragma omp section}
+\IF{$lowTemp < high$}
+   \STATE{Quicksort($A$, $lowTemp$, $high$)}
+\ENDIF
+\end{algorithmic}
+\label{alg:qsort}
+\end{algorithm}
+
+\begin{table}[H]
+\centering
+\caption{Sequential Quicksort}
+\begin{tabular}{l | c c c c }
+\hline\hline
+Trial & $10^{6}$ & $10^{7}$ & $10^{8}$ & $10^{9}$\\
+\hline
+1 & 1.834 & 10.303 & \phantom{1}96.025 & 1074.892 \\
+2 & 0.998 & \phantom{1}9.893 & \phantom{1}96.486 & \phantom{1}991.330 \\
+3 & 1.045 & 10.014 & \phantom{1}86.391 & 1004.014\\
+4 & 1.025 & \phantom{1}9.697 & \phantom{1}95.041 & 1010.462\\
+5 & 1.005 & \phantom{1}9.711 & \phantom{1}96.526 & \phantom{1}980.120\\
+6 & 0.999 & \phantom{1}9.441 & \phantom{1}95.888 & \phantom{1}983.255\\
+7 & 1.045 & \phantom{1}9.579 & \phantom{1}97.899 & 1025.144\\
+8 & 1.032 & \phantom{1}9.673 & 103.794 & \phantom{1}976.797\\
+9 & 1.102 & \phantom{1}9.902 & \phantom{1}97.106 & 1000.652\\
+10 & 1.024 & \phantom{1}9.511 & \phantom{1}98.356 & \phantom{1}968.181\\
+\hline
+Average: & 1.111 & \phantom{1}9.772 & \phantom{1}96.351 & 1001.485\\
+\hline\hline
+\multicolumn{5}{l}{{\scriptsize $\dagger$ Given values are in seconds}}
+\end{tabular}
+\label{table:qsort_seq}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Parallel Quicksort}
+\begin{tabular}{l | c c c c }
+\hline\hline
+Trial & $10^{6}$ & $10^{7}$ & $10^{8}$ & $10^{9}$\\
+\hline
+1 & 1.396 & \phantom{1}9.412 & 82.749 & 627.391\\
+2 & 0.780 & 10.210 & 88.215 & 932.276\\
+3 & 0.741 & 10.119 & 86.078 & 823.983\\
+4 & 0.812 & \phantom{1}8.434 & 85.709 & 617.227\\
+5 & 1.001 & \phantom{1}5.841 & 69.367 & 673.040\\
+6 & 0.866 & \phantom{1}8.230 & 54.480 & 573.038\\
+7 & 1.049 & \phantom{1}5.428 & 80.597 & 821.517\\
+8 & 0.909 & \phantom{1}9.820 & 65.599 & 897.548\\
+9 & 0.712 & \phantom{1}5.649 & 53.588 & 716.353\\
+10 & 0.997 & \phantom{1}6.846 & 77.292 & 587.314\\
+\hline
+Average: & 0.926 & \phantom{1}7.999 & 74.367 & 727.869\\
+\hline\hline
+\multicolumn{5}{l}{{\scriptsize $\dagger$ Given values are in seconds}}
+\end{tabular}
+\label{table:qsort_parallel}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{{\tt std::sort()}}
+\begin{tabular}{l | c c c c }
+\hline\hline
+Trial & $10^{6}$ & $10^{7}$ & $10^{8}$ & $10^{9}$\\
+\hline
+1 & 0.043 & 0.461 & 5.892 & 53.614\\
+2 & 0.051 & 0.817 & 5.043 & 52.540\\
+3 & 0.043 & 0.488 & 5.798 & 55.786\\
+4 & 0.051 & 0.526 & 5.825 & 52.779\\
+5 & 0.051 & 0.517 & 5.025 & 57.002\\
+6 & 0.051 & 0.719 & 5.876 & 53.381\\
+7 & 0.049 & 0.464 & 6.019 & 54.771\\
+8 & 0.051 & 0.562 & 6.035 & 53.615\\
+9 & 0.051 & 0.474 & 5.806 & 52.790\\
+10 & 0.051 & 0.478 & 5.640 & 52.570\\
+\hline
+Average: & 0.049 & 0.551 & 5.696 & 53.885\\
+\hline\hline
+\multicolumn{5}{l}{{\scriptsize $\dagger$ Given values are in seconds}}
+\end{tabular}
+\label{table:sort}
+\end{table}
+
+\end{solution}
+\end{questions}
+
+\begin{thebibliography}{99}
+%\bibitem{parallel_forward}Jan Verschelde, University of Illinois at Chicago, \url{http://homepages.math.uic.edu/~jan/mcs572/pipetriangular.pdf}
+\bibitem{qsort}S. Qin, Florida Institute of Technology, \url{http://cs.fit.edu/~pkc/classes/writing/hw15/song.pdf}
+\end{thebibliography}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

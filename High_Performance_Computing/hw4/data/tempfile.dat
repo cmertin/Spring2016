@@ -1,0 +1,21 @@
+N = 1
+Max Execution Time: 0.000190973 seconds
+Max Execution Time: 9.39369e-05 seconds
+Max Execution Time: 0.000136852 seconds
+Max Execution Time: 0.000124931 seconds
+Max Execution Time: 0.000133038 seconds
+
+N = 10
+Max Execution Time: 0.00027895 seconds
+Max Execution Time: 0.0601051 seconds
+Max Execution Time: 0.000285149 seconds
+Max Execution Time: 0.000279903 seconds
+Max Execution Time: 0.000290155 seconds
+
+N = 100
+Max Execution Time: 0.000647068 seconds
+Max Execution Time: 0.000671625 seconds
+Max Execution Time: 0.000710011 seconds
+Max Execution Time: 0.000571012 seconds
+Max Execution Time: 0.000571012 seconds
+

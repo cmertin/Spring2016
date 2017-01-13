@@ -1,0 +1,8 @@
+#!/bin/bash
+
+for i in `seq 31 2 56`; do
+    sep=$i
+    echo $i
+    #u startX startY width height separation
+    ./separation 40 10 38 15 15 $sep
+done

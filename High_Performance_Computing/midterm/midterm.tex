@@ -1,0 +1,336 @@
+\documentclass[addpoints]{exam}
+\usepackage{amsmath,amsthm,amssymb,url}
+
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{units}
+%\usepackage{algpseudocode}
+
+\usepackage[pdftex]{hyperref}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usetikzlibrary{calc,3d,decorations.markings, backgrounds, positioning,intersections,shapes}
+
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+%\algnewcommand\algorithmicparfor{\textbf{parallel for}}
+%\algdef{S}[FOR]{PFOR}[1]{\algorithmicparfor\ #1\ \algorithmicdo}
+
+\newcommand{\BigO}[1]{\mathcal{O}\left( #1\right)}
+\newcommand{\ceil}[1]{\left \lceil #1 \right \rceil }
+\newcommand{\floor}[1]{\left \lfloor #1 \right \rfloor }
+\newcommand{\Mod}[1]{\ \text{\bf mod}\ #1}
+
+\newtheorem{lemma}{Lemma}[section]
+\newcommand{\var}{\text{Var}}
+\title{CS 6230: Midterm}
+\date{Due Date: March 31, 2016}
+\author{Christopher Mertin}
+\begin{document}
+\maketitle
+%\begin{center}
+%\fbox{\fbox{\parbox{5.5in}{\centering
+%This assignment has \numquestions\ questions, for a total of \numpoints\
+%points.
+%Unless otherwise specified, complete and reasoned arguments will be
+%expected for all answers. 
+%}}}
+%\end{center}
+
+\qformat{Question \thequestion: \thequestiontitle\dotfill}
+\pointname{}
+\bonuspointname{}
+\pointformat{[\bfseries\thepoints]}
+
+\printanswers
+
+
+
+\begin{questions}
+
+\titledquestion{Parallel Maximum Subarray}
+You are given a one dimensional array that may contain both positive and negative numbers, develop a parallel algorithm to find the sum of contiguous subarray of numbers which has the largest sum. For example, if the given array is $[-2,-5,\underline{6},\underline{-2},\underline{-3},\underline{1},\underline{5},-6]$, then the maximum subarray sum is $7$ (underlined numbers).
+
+\begin{solution}
+The sequential version of this is known as \href{https://en.wikipedia.org/wiki/Maximum_subarray_problem}{Kadane's Algorithm} for the maximum subarray problem and, and the pseudocode is given as
+
+\begin{algorithm}[H]
+\caption{Kadane's Algorithm}
+\begin{algorithmic}[1]
+\REQUIRE{Array $A\in \mathbb{R}^{n\times 1}$}
+\ENSURE{Maximum sum of contiguous subarray}
+\STATE{$max_{1}\leftarrow 0$}
+\STATE{$max_{2}\leftarrow 0$}
+\FOR{$i = 0$ \TO $n-1$}
+    \STATE{$max_{2}\leftarrow max_{1} + A_{i}$}
+    \IF{$max_{2} < 0$}
+       \STATE{$max_{2}\leftarrow 0$}
+    \ENDIF
+    \IF{$max_{1} < max_{2}$}
+       \STATE{$max_{1}\leftarrow max_{2}$}
+    \ENDIF
+\ENDFOR
+\RETURN{$max_{1}$}
+\end{algorithmic}
+\end{algorithm}
+
+which is $\BigO{n}$ in complexity. This can be done in parallel in $\BigO{\log^{2}(n/p)}$ in the following way, where a Reduction would be performed at {\em each level} of the Prefix Sum, hence it's denoted as ``PrefixSumReduction.''
+
+\begin{algorithm}[H]
+\caption{Parallel Max Subarray Problem}
+\begin{algorithmic}[1]
+\REQUIRE{Array $A\in \mathbb{R}^{n\times 1}$}
+\ENSURE{Maximum sum of contiguous subarray}
+\STATE{$b_{1}\leftarrow$ PrefixSumReduction($A$,{\sc Max})}
+\COMMENT{PrefixSum is inclusive}
+\STATE{$b_{2}\leftarrow $ PrefixSumReduction($A$,{\sc Max})}
+\COMMENT{PrefixSum is exclusive}
+\RETURN{{\sc Max}($b_{1}$,$b_{2}$)}
+\end{algorithmic}
+\end{algorithm}
+\end{solution}
+\ \newpage
+\titledquestion{Parallel Array Reordering}
+Suppose we are given a set of $n$ elements stored in an array $A$ together with an array $L$ such that $L_{i} \in \{1,2,\ldots,k\}$ represents the label of element $A_{i}$, where $k$ is a constant. Develop an optimal $\BigO{\log(n)}$ time {\sc Er--Ew Pram} algorithm that stores all the elements of $A$ with label $1$ into the upper part of $A$ while preserving their initial ordering, followed by the elements labeled $2$, with the same initial ordering, and so on. For Example:
+
+\begin{align*}
+A &= \left[ 6, 5, 3, 9, 11, 12, 8, 17, 21, 2\right]\\
+L &= \left[ 1, 1, 2, 3, \phantom{1}2, \phantom{1}1, 1, \phantom{1}2, \phantom{1}3, 3\right]\\
+\intertext{produces}
+A &= \left[ 6,5,12,8,3,11,17,9,21,2 \right]
+\end{align*}
+
+\begin{solution}
+A sequential version of this code would be as follows
+
+\begin{algorithm}[H]
+\caption{Sequential Array Reordering}
+\begin{algorithmic}[1]
+\REQUIRE{$A\in \mathbb{R}^{n\times 1}$, $L\in \mathbb{R}^{n\times 1}$}
+\ENSURE{$C\in \mathbb{R}^{n\times 1}$ as a sorted array according to $L$}
+\STATE{Create $M\in \mathbb{R}^{k\times n}$}
+\FOR{$i = 0$ \TO $n-1$}
+    \STATE{$j\leftarrow L_{i}$}
+    \STATE{$M_{j,i}\leftarrow A_{i}$}
+\ENDFOR
+\STATE{$C \leftarrow $ In-Order Traversal of elements in $M$}
+\RETURN{$C$}
+\end{algorithmic}
+\end{algorithm}
+
+This would be done in $\BigO{n}$. In parallel, for a {\sc Er--Ew Pram} model, to do this in $\BigO{\log(n)}$ can be done with the following algorithm, provided that $p > \frac{n}{\log (n)}$
+
+\begin{algorithm}[H]
+\caption{Parallel Array Reordering}
+\begin{algorithmic}[1]
+\REQUIRE{$A\in \mathbb{R}^{n\times 1}$, $L\in \mathbb{R}^{n\times 1}$}
+\ENSURE{$C\in \mathbb{R}^{n\times 1}$ as a sorted array according to $L$}
+\STATE{$\ell_{max} \leftarrow $ Reduction$(L,${\sc Max}$)$}
+\FOR{$i = 0$ \TO $\ell_{max}$}
+\STATE{$S \leftarrow \{\}$}
+\STATE{$\ell \leftarrow $Reduction$(L,${\sc Min}$+i)$}
+\FOR{$j = \frac{n}{p}(thread)$ \TO $\frac{n}{p}(thread + 1)$}
+    \IF{$L_{j} = \ell$}
+        \STATE{$S \leftarrow $ Append$(A_{j})$}
+    \ENDIF
+\ENDFOR
+\STATE{Gather$(C,S)$}
+\COMMENT{Gathers all arrays of $S$ to $C$}
+\ENDFOR
+\RETURN{$C$}
+\end{algorithmic}
+\end{algorithm}
+\end{solution}
+
+\ \newpage
+\titledquestion{Parallel Fibonacci Numbers}
+Develop a work and depth optimal parallel algorithm for computing the first $n$ \href{https://en.wikipedia.org/wiki/Fibonacci_number}{Fibonacci Numbers}
+
+\begin{solution}
+There are two sequential implementations for calculating the Fibonacci Sequence. Algorithm~\ref{alg:fib1} is the brute force approach, which is just based on the definition of calculating the Fibonacci Sequence. The time complexity of this algorithm is $T(n) = T(n-1) + T(n-2)$, which is exponential in $n$.
+
+On the other hand, Algorithm~\ref{alg:fib2} is an approach that is faster but trades off with utilizing storage. Instead of recalculating {\em every} Fibonacci number, Algorithm~\ref{alg:fib2} stores the ones that have been calculated already. It is therefore a much more efficient algorithm, though it does take up $\BigO{n}$ storage. The time complexity for this algorithm is only $\BigO{n}$ which is much better than Algorithm~\ref{alg:fib1}, so it would be more ideal to parallelize this version to get a larger benefit.
+
+\begin{algorithm}[H]
+\centering
+\caption{$Fibonacci(n)$}
+\begin{algorithmic}[1]
+\REQUIRE{$n^{th}$ Fibonacci Number you're calculating}
+\ENSURE{Value of $n^{th}$ Fibonacci Number}
+\IF{$n = 0$}
+   \RETURN{0}
+\ELSIF{$n = 0$ \OR $n = 2$}
+       \RETURN{1}
+\ELSE
+       \RETURN{$Fibonacci(n-1)+Fibonacci(n-2)$}
+\ENDIF
+\end{algorithmic}
+\label{alg:fib1}
+\end{algorithm}
+
+\begin{algorithm}[H]
+\centering
+\caption{$Fibonacci(A,n)$}
+\begin{algorithmic}[1]
+\REQUIRE{Array $A\in \mathbb{R}^{n\times 1}$, $n^{th}$ Fibonacci Number you're calculating}
+\ENSURE{Value of $n^{th}$ Fibonacci Number}
+\IF{$n = 0$}
+   \RETURN{0}
+\ELSIF{$n = 1$ \OR $n = 2$}
+   \STATE{$A_{n}\leftarrow 1$}
+   \RETURN{1}
+\ELSIF{$A_{n} \neq 0$}
+   \RETURN{$A_{n}$}
+\ELSE
+   \STATE{$A_{n} \leftarrow Fibonacci(A,n-1)+Fibonacci(A,n-2)$}
+   \RETURN{$A_{n}$}
+\ENDIF
+\end{algorithmic}
+\label{alg:fib2}
+\end{algorithm}
+
+\begin{algorithm}[H]
+\centering
+\caption{(Parallel) $Fibonacci(A,n)$}
+\begin{algorithmic}[1]
+\REQUIRE{Array $A\in \mathbb{R}^{n\times 1}$, $n^{th}$ Fibonacci Number you're calculating}
+\ENSURE{Value of $n^{th}$ Fibonacci Number}
+\IF{$n = 0$}
+   \RETURN{0}
+\ELSIF{$n = 1$ \OR $n = 2$}
+   \STATE{$A_{n}\leftarrow 1$}
+   \RETURN{1}
+\ELSIF{$A_{n} \neq 0$}
+   \RETURN{$A_{n}$}
+\ELSE
+   \STATE{$A_{n}^{(1)}\leftarrow Fibonacci(A,n-1)$}
+   \COMMENT{Done by original thread}
+   \STATE{$A_{n}^{(2)}\leftarrow Fibonacci(A,n-2)$}
+   \COMMENT{Given to a new thread to be done in parallel}
+   \STATE{(Sync the threads)}
+   \RETURN{$A_{n}^{(1)} + A_{n}^{(2)}$}
+   \COMMENT{From the original thread}
+\ENDIF
+\end{algorithmic}
+\label{alg:fib2par}
+\end{algorithm}
+
+Since this is being done in parallel, it the complexity would reduce down to $\BigO{n/p}$.
+\end{solution}
+
+\ \newpage
+\titledquestion{Distributed Matrix Transpose}
+Suppose an $n\times n$ matrix is embedded in a hypercube (we assume that $n$ is a power of 2). Find an algorithm for transposing this matrix in $\BigO{\log(n)}$ time. 
+
+{\em Hint:} $2^{k} = n^{2} = 2^{2q}$
+
+\begin{solution}
+The sequential case of Matrix Transpose takes $\BigO{n^{2}}$ time via the following algorithm
+
+\begin{algorithm}[H]
+\caption{Sequential Matrix Transpose}
+\begin{algorithmic}[1]
+\REQUIRE{Matrix $A\in \mathbb{R}^{n\times n}$}
+\ENSURE{$A^{T}\in \mathbb{R}^{n\times n}$}
+\FOR{$i = 0$ \TO $n-1$}
+    \FOR{$j = 0$ \TO $n-1$}
+        \STATE{$swap(A_{i,j},A_{j,i})$}
+    \ENDFOR
+\ENDFOR
+\end{algorithmic}
+\end{algorithm}
+
+For the distributed case, we first have to define the set of diagonals. This problem {\em assumes} that each node contains one index of each matrix. Therefore, the node numbers is in the set $\{1,2,3,\ldots,n\times n\}$. Furthermore, we can define the diagonals of the matrix as being in the set $\{n\times n, n\times (n-1) - 1, n\times (n-2) - 2,\ldots,n\times 1 - (n-1)\}$. For the algorithm, these will be denoted as ``$Diag$.''
+
+\begin{algorithm}[H]
+\caption{Parallel Matrix Transpose}
+\begin{algorithmic}
+\REQUIRE{$nodeID$ (rank of each node), $n$}
+\ENSURE{Transposed Matrix}
+\IF{$nodeID \notin Diag$}
+\STATE{$column \leftarrow \ceil{\frac{nodeID}{n}}$}
+\STATE{$row \leftarrow nodeID \Mod{n}$}
+\IF{$row = 0$}
+   \STATE{$row \leftarrow n$}
+\ENDIF
+\STATE{$newColumn \leftarrow row$}
+\STATE{$newRow \leftarrow row$}
+\STATE{$otherNode \leftarrow n\times newColumn - (n - newRow)$}
+\STATE{Send$(nodeID,otherNode)$}
+\STATE{Receive$(otherNode,nodeID)$}
+\ENDIF
+\end{algorithmic}
+\end{algorithm}
+
+As the {\em maximum} communication time from one end of a hypercube to the other is $\BigO{log(n)}$, then the time complexity of this algorithm is $\BigO{log(n)}$. This above algorithm assumes that the node numbering is sequential along the row up through $n$. For example, the first column for $3\times 3$ is $\{1, 2, 3\}$, the second column is $\{4, 5, 6\}$, and the third is $\{7, 8, 9\}$.
+
+\end{solution}
+
+
+\ \newpage
+\titledquestion{Parallel Horner's Algorithm}
+Let $p(x) = a_{0}x^{n} + a_{1}x^{n-1} + \cdots + a_{n-1}x + a_{n}$ be a given polynomial. {\em Horner's Algorithm} can be used to compute $p(x)$ at a point $x_{0}$ is based on rewriting the expression for $p(x_{0})$ as follows:
+
+\begin{align*}
+p(x_{0}) &= \left( \cdots \left(\left( a_{0}x_{0} + a_{1}\right) x_{0} + a_{2}\right)x_{0} + \cdots + a_{n-1}\right)x_{0} + a_{n}
+\end{align*}
+
+An obvious sequential algorithm for this problem has $\BigO{n}$ complexity. Is it possible to develop a work optimal parallel algorithm whose complexity is $\BigO{n/p + \log(n)}$ for $p$ processors? Give pseudocode for the best possible parallel algorithm.
+
+\begin{solution}
+The sequential code that was discussed in the question can be seen in the algorithm below, which is $\BigO{n}$.
+\begin{algorithm}[H]
+\caption{Horner's Algorithm (Sequential)}
+\begin{algorithmic}[1]
+\REQUIRE{$a\in \mathbb{R}^{n\times 1}$, $x$}
+\ENSURE{$p(x)$}
+\STATE{$p\leftarrow 0$}
+\FOR{$i = n$ \TO 0}
+    \STATE{$p \leftarrow a_{i} + x\cdot p$}
+\ENDFOR
+\RETURN{$p$}
+\end{algorithmic}
+\end{algorithm}
+
+The operation can be done in $\BigO{n/p + \log(n)}$, but it is not work optimal as it requires more work. In order to do so, take a look at the following example where $n = 40$ with $4$ nodes. This will put 10 on each node.
+
+\begin{align*}
+&\left(a_{39}x^{9}+a_{38}x^{8}+\cdots + a_{30}\right)x^{30}\\
+&\left(a_{29}x^{9}+a_{28}x^{8}+\cdots + a_{20}\right)x^{20}\\
+&\left(a_{19}x^{9}+a_{18}x^{18}+\cdots + a_{10}\right)x^{10}\\
+&\left(a_{9}x^{9}+a_{8}x^{8} + \cdots + a_{1}x + a_{0}\right)
+\end{align*}
+
+From here, a reduction operation can be performed such to get the $\BigO{\log(n)}$ complexity, as the above gives $n/p$. This is not work optimal as you have to do more work, but the depth is reduced.
+
+\begin{algorithm}[H]
+\caption{Horner's Algorithm (Parallel)}
+\begin{algorithmic}[1]
+\REQUIRE{$a\in \mathbb{R}^{n\times 1}$, $x$}
+\ENSURE{$p(x)$}
+\STATE{$p \leftarrow 0$}
+\IF{$thread \neq 1$}
+\STATE{$high \leftarrow \frac{n}{p}(thread)$}
+\STATE{$low \leftarrow \frac{n}{p}(thread - 1)$}
+\STATE{$p \leftarrow \left(\sum_{i=low}^{high}a_{i}x^{i-low} \right)x^{low}$}
+\ELSE
+\STATE{$p \leftarrow \left( \sum_{i=n/p}^{1}a_{i}x^{(n/p)-i}\right)x + a_{0}$}
+\ENDIF
+\RETURN{Reduce($p$,{\sc Sum})}
+\end{algorithmic}
+\end{algorithm}
+\end{solution}
+
+\end{questions}
+%\begin{thebibliography}{99}
+%\bibitem{qselect}James Aspnes, Yale, \url{http://www.cs.yale.edu/homes/aspnes/pinewiki/QuickSelect.html}
+%\end{thebibliography}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

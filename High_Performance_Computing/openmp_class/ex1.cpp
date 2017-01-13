@@ -1,0 +1,57 @@
+#include <iostream>
+#include <cstdlib>
+#include <omp.h>
+
+using namespace std;
+
+int main(int argc, char *argv[])
+{
+  if(argc < 2)
+    {
+      cerr << "Usage: " << argv[0] << " #" << endl;
+      return -1;
+    }
+
+  double t1 = 0;
+  double t2 = 0;
+  int n = atoi(argv[1]);
+  int numThreads;
+  int chunkSize;
+
+  srand(n);
+
+  double *A = new double[n];
+  double *B = new double[n];
+
+  #pragma omp parallel for
+  for(int i = 0; i < n; ++i)
+    {
+      A[i] = rand();
+    }
+
+  t1 = omp_get_wtime();
+  //#pragma omp parallel for
+  #pragma omp parallel
+  {
+    #pragma omp master
+      {
+        numThreads = omp_get_num_threads();
+        chunkSize = n/numThreads;
+      }
+    int tid = omp_get_thread_num();
+    for(int i = tid * chunkSize; i < (tid + 1) * chunkSize; ++i)
+      {
+	B[i] = A[i] * A[i];
+      }
+    // for(int i = tid; i < n; i += numThreads)
+    // doesn't matter about if it's divisible with chunkSize
+  }
+  t2 = omp_get_wtime();
+
+  cout << "Operation took " << (t2-t1) << " seconds" << endl;
+
+  delete A;
+  delete B;
+
+  return 0;
+}

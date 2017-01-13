@@ -1,0 +1,14 @@
+bug 1
+* Needed to be the same tag so set tag=0 for both nodes
+bug 2
+* Has to send and receive the same data. Set MPI_FLOAT to MPI_INT
+bug 3
+* Need to call MPI_Init before calling MPI functions and MPI_Finalize at end
+bug 4
+* Needed to reduce the values on the root node. Added a MPI_Reduce
+bug 5
+* Bad to use MPI_BYTE as char could be different per machine. Used MPI_CHAR
+bug 6
+* Set offset = 0 since each node gets its own version of the array, it's useless
+bug 7
+* count was set to taskid which would give a "count" of 0 for the root

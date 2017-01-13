@@ -1,0 +1,260 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+#include <vector>
+#include <iomanip>
+#include <sstream>
+#include <string>
+#include <algorithm>
+#include "Dimensions.h"
+//#include "Output.h"
+#include "Solve.h"
+
+using namespace std;
+
+template <typename T>
+void UpdateVelocities(Flow<T> &flow, Dimensions<T> &dim);
+template <typename T>
+void VorticityTime(Flow<T> &flow, Dimensions<T> &dim);
+template <typename T>
+void VorticityInside(Flow<T> &flow, Dimensions<T> &dim);
+template <typename T>
+void VorticityWall(Flow<T> &flow, Dimensions<T> &dim);
+template <typename T>
+bool StopCondition(vector<T> &omega, vector<T> &omegaOld, double &tol=10e-6);
+
+int main(int argc, char *argv[])
+{
+  Dimensions<double> dim;
+  Flow<double> flow;
+  double tol = 10e-6;
+  double time = 0.0;
+  bool stop = false;
+  const int MAXITR = 1000;
+  int counter = 0;
+  // Initialize physcial parameters
+  dim.minX = 0.0;
+  dim.maxX = 1.0;
+  dim.minY = 0.0;
+  dim.maxY = 1.0;
+  dim.Nx = 50;
+  dim.Ny = 50;
+  dim.dx = (dim.maxX - dim.minX)/(dim.Nx - 1);
+  dim.dy = (dim.maxY - dim.minY)/(dim.Ny - 1);
+  dim.Re = 100;
+  dim.nu = 0.1;
+  dim.dt = 10e-5;
+  dim.U = (dim.Re * dim.nu)/(dim.maxX - dim.minX);
+  dim.x.resize(dim.Nx, 0);
+  dim.y.resize(dim.Ny, 0);
+  // Initialize flow vectors
+  flow.psi.resize(dim.Nx * dim.Ny, 0);
+  flow.omega.resize(dim.Nx * dim.Ny, 0);
+  flow.u.resize(dim.Nx * dim.Ny, 0);
+  flow.v.resize(dim.Nx * dim.Ny, 0);
+  vector<double> psiOld;
+  vector<double> omegaOld;
+
+  // Initializes required parameters
+  for(int i = 1; i < dim.Ny; ++i)
+    dim.y[i] = dim.y[i-1] + dim.dy;
+
+  for(int i = 1; i < dim.Nx; ++i)
+    dim.x[i] = dim.x[i-1] + dim.dx;
+
+  for(int i = 0; i < dim.Nx; ++i)
+    flow.u[i + (dim.Ny-1)*dim.Nx] = dim.U;
+
+  // Build initial vorticity
+  for(int j = 1; j < dim.Ny; ++j)
+    {
+      double dx_ = 2*dim.dx;
+      double dy_ = 2*dim.dy;
+      double dv_dx;
+      double du_dy;
+      double coeff = -2/(dim.dx * dim.dx);
+      for(int i = 1; i < dim.Nx; ++i)
+	{
+	  dv_dx = (flow.v[i+1 + j*dim.Nx] - flow.v[i-1 + j*dim.Nx])/dx_;
+	  du_dy = (flow.u[i + (j+1)*dim.Nx] - flow.u[i + (j-1)*dim.Nx])/dy_;
+	  if(j == dim.Ny -1)
+	    flow.omega[i + j*dim.Nx] = coeff*(flow.psi[i + (j-1)*dim.Nx] + dim.U * dim.dx);
+	  else
+	    flow.omega[i + j*dim.Nx] = dv_dx - du_dy;
+	}
+    }
+
+  ++counter;
+
+  // Iterates through time until convergence
+  do
+    {
+      time += dim.dt;
+      cout << "Time: " << setprecision(4) << fixed << time << " seconds" <<  endl;
+
+      omegaOld = flow.omega;
+
+      // Update vorcitiy in time
+      VorticityTime(flow, dim);
+
+      // Solve for Psi with new values of omega
+      //Jacobi(flow, dim);
+      //GaussSeidel(flow, dim);
+      GaussSeidel_SOR(flow, dim, 1.25);
+      
+      // Find the velocity components from the solved psi
+      UpdateVelocities(flow, dim);
+
+      // Update the vorticity at the wall and the interior
+      VorticityInside(flow, dim);
+      VorticityWall(flow, dim);
+      
+      // Check stopping condition
+      if(counter % 100 == 0)
+	stop = StopCondition(flow.omega, omegaOld, tol);
+
+      ++counter;
+      
+    }while(stop != true);
+
+  
+  string filename = "finished.dat";
+  ofstream outfile;
+  outfile.open(filename.c_str());
+  outfile << setprecision(6) << fixed;
+
+  for(int j = 0; j < dim.Ny; ++j)
+    {
+      int Nx = dim.Nx;
+      for(int i = 0; i < dim.Nx; ++i)
+	{
+	  outfile << dim.x[i] << ',' << dim.y[j] << ',' << flow.omega[i + j*Nx] << ',' << flow.psi[i + j*Nx] << ',' << flow.u[i + j*Nx] << ',' << flow.v[i + j*Nx] << endl;
+	}
+    }
+  outfile.close();
+
+  cout << "Plotting... ";
+  cout.flush();
+  system("./plot.py");
+  cout << "DONE" << endl;
+
+  
+  return 0;
+}
+
+template <typename T>
+void UpdateVelocities(Flow<T> &flow, Dimensions<T> &dim)
+{
+  int Nx = dim.Nx;
+  int Ny = dim.Ny;
+  double dx_ = 2*dim.dx;
+  double dy_ = 2*dim.dy;
+  for(int j = 1; j < Ny-1; ++j)
+    {
+      for(int i = 1; i < Nx-1; ++i)
+	{
+	  double dpsi_dy = (flow.psi[i + (j+1)*Nx] - flow.psi[i + (j-1)*Nx])/dy_;
+	  double dpsi_dx = (flow.psi[i+1 + j*Nx] - flow.psi[i-1 + j*Nx])/dx_;
+	  flow.u[i + j*Nx] = dpsi_dy;
+	  flow.v[i + j*Nx] = -dpsi_dx;
+	}
+    }
+  return;  
+}
+
+template <typename T>
+void VorticityTime(Flow<T> &flow, Dimensions<T> &dim)
+{
+  vector<T> omega = flow.omega;
+  double dt = dim.dt;
+  int Nx = dim.Nx;
+  int Ny = dim.Ny;
+  double dpsi_dx;
+  double dpsi_dy;
+  double dx_ = 2*dim.dx;
+  double dy_ = 2*dim.dy;
+  double dx2 = dim.dx * dim.dx;
+  double domega_dx;
+  double domega_dy;
+  double d2;
+  for(int j = 1; j < Ny-1; ++j)
+    {
+       for(int i = 1; i < Nx-1; ++i)
+	{
+	  int index = i + j*Nx;
+	  dpsi_dy = (flow.psi[i + (j+1)*Nx] - flow.psi[i + (j-1)*Nx])/dy_;
+	  dpsi_dx = (flow.psi[i+1 + j*Nx] - flow.psi[i-1 + j*Nx])/dx_;
+	  domega_dy = (omega[i + (j+1)*Nx] - omega[i + (j-1)*Nx])/dy_;
+	  domega_dx = (omega[i+1 + j*Nx] - omega[i-1 + j*Nx])/dx_;
+	  d2 = (omega[i+1 + j*Nx] + omega[i-1 + j*Nx] + omega[i + (j+1)*Nx]
+		+ omega[i + (j-1)*Nx] - 4 * omega[index])/dx2;
+	  flow.omega[index] = omega[index]
+	    + dim.dt * (dpsi_dy * domega_dx - dpsi_dx * domega_dy
+			+ dim.nu * d2);
+	}
+    }
+  return;
+}
+
+template <typename T>
+void VorticityInside(Flow<T> &flow, Dimensions<T> &dim)
+{
+  int Nx = dim.Nx;
+  int Ny = dim.Ny;
+  double dx2 = dim.dx * dim.dx;
+  double dy2 = dim.dy * dim.dy;
+  double d2psi_dx2;
+  double d2psi_dy2;
+  for(int j = 1; j < Ny-1; ++j)
+    {
+      for(int i = 1; i < Nx-1; ++i)
+	{
+	  int index = i + j*Nx;
+	  d2psi_dx2 = (flow.psi[i+1 + j*Nx] - 2*flow.psi[index] + flow.psi[i-1 + j*Nx])/dx2;
+	  d2psi_dy2 = (flow.psi[i + (j+1)*Nx] - 2*flow.psi[index] + flow.psi[i + (j-1)*Nx])/dy2;
+	  flow.omega[index] = -(d2psi_dx2 + d2psi_dy2);
+	}
+    }
+  return;
+}
+
+template <typename T>
+void VorticityWall(Flow<T> &flow, Dimensions<T> &dim)
+{
+  int Nx = dim.Nx;
+  int Ny = dim.Ny;
+  double coeff = 2/(dim.dx * dim.dx);
+  for(int j = 0; j < Ny; ++j)
+    {
+      for(int i = 0; i < Nx; ++i)
+	{
+	  int index = i + j*Nx;
+	  if(i == 0) // Left boundary
+	    flow.omega[index] = coeff*(flow.psi[index] - flow.psi[i+1 + j*Nx]);
+	  else if(j == 0) // Bottom boundary
+	    flow.omega[index] = coeff*(flow.psi[index] - flow.psi[i + (j+1)*Nx]);
+	  else if(i == Nx - 1) // Right boundary
+	    flow.omega[index] = coeff*(flow.psi[index] - flow.psi[i-1 + j*Nx]);
+	  else if(j == Ny - 1) // Top boundary
+	    flow.omega[index] = coeff*((flow.psi[index] - flow.psi[i + (j-1)*Nx]) - dim.U * dim.dx);
+	}
+    }
+  return;
+}
+
+template <typename T>
+bool StopCondition(vector<T> &omega, vector<T> &omegaOld, double &tol)
+{
+  vector<T> diff(omega.size(), 0);
+  T maxDiff = 100;
+  for(int i = 0; i < omega.size(); ++i)
+    diff[i] = abs(omega[i] - omegaOld[i]);
+
+  maxDiff = *(max_element(diff.begin(), diff.end()));
+
+  if(maxDiff < tol)
+    return true;
+  else
+    return false;
+}
+

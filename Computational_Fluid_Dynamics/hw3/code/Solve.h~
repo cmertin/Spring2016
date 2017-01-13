@@ -1,0 +1,10 @@
+#ifndef SOLVE_H
+#define SOLVE_H
+
+template <typename T>
+void Jacobi(vector<T> &A, vector<T> &x, vector<T> &b, const int MAXITR=10000)
+{
+  
+}
+
+#endif

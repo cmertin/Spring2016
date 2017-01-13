@@ -1,0 +1,7 @@
+#include "parUtils.h"
+#include "octUtils.h"
+#include "TreeNode.h"
+#include "externVars.h"
+#include "dendro.h"
+#include "treenode2vtk.h"
+#include "hcurvedata.h"

@@ -1,0 +1,103 @@
+#! /usr/bin/octave -qf
+
+############ Several smoothers ######
+
+function y = SmootherRic(A,x,b,omega)
+    r = b-A*x;
+    y = x + omega*r;
+endfunction
+
+function y = SmootherJac(A,x,b,omega)
+    r = b-A*x;
+    M = diag(diag(A));
+    y = x + omega*M\r;
+endfunction
+
+function y = SmootherGS(A,x,b)
+    r = b-A*x;
+    M = tril(A);
+    y = x + M\r;
+endfunction
+
+function y = SmootherSOR(A,x,b,omega)
+    r = b-A*x;
+    D = diag(diag(A));
+    E = D-tril(A);
+    M = (D-omega*E)/omega;
+    y = x + M\r;
+endfunction
+
+function y = SmootherSSOR(A,x,b,omega)
+    r = b-A*x;
+    D = diag(diag(A));
+    E = D-tril(A);
+    F = D-triu(A);
+    M = (D-omega*E)*inv(D)*(D-omega*F)/(omega*(2-omega));
+    y = x + M\r;
+endfunction
+
+########## Restriction matrix ######
+
+function y = FullWeightingMatrix(n)
+    nr = (n-1)/2;
+    y  = zeros(nr,n);
+    for i=1:nr
+	y(i,2*i)   = 2/4;
+	y(i,2*i-1) = 1/4;
+	y(i,2*i+1) = 1/4;
+    endfor;
+endfunction
+
+function y = TwoGrid(A,x,b,omega, nu_1, nu_2)
+
+    for i = 1:nu_1 			
+	x = SmootherRic(A,x,b,omega);	### Pre-smoothing
+    endfor
+    
+    rh = b-A*x;
+    
+    [n,n] = size(A);
+    IhH= FullWeightingMatrix(n);	# restriction matrix
+    IHh= 2*IhH';			# interpolation matrix
+
+    rH = IhH*rh;			# projection of the residuum on the coarse mesh
+    AH = IhH*A*IHh;			# Galerkin projection
+
+    deltaH = AH\rH;			# evaluate correction on the coarse mesh
+
+    deltah = IHh*deltaH;		# interpolate back to the fine mesh
+    
+    x = x + deltah;			# add correction to x
+	
+    for i = 1:nu_2 			
+	x = SmootherRic(A,x,b,omega);	#### Post-smoothing
+    endfor
+
+    y = x;
+endfunction
+
+########## Main program #############
+    
+n    = 511;
+
+v    = zeros(n,1);
+v(1) = 2;
+v(2) = -1;
+A    = toeplitz(v);
+
+x_ex = rand(n,1);
+b    = A*x_ex;
+
+x = zeros(n,1);
+
+gplot [0:n] [-0.1:1.1] x_ex-x with lines title "Initial Error"
+input("Press enter to start Two-Grid iterations");
+
+for i = 1:1000
+
+    x = TwoGrid(A,x,b,0.25,2,2);     
+
+    gplot [0:n] [-0.1:1.1] x_ex-x with lines title strcat("Error after ",int2str(i)," iteration(s)");
+    sleep (0.5);
+    
+endfor

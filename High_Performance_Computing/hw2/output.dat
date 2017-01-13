@@ -1,0 +1,1250 @@
+
+
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+		PERFORMING TEST 1
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+		TESTING QUICKSORT
+
+	#######################
+	Running for N = 1000000
+	#######################
+
+Allocating Memory & Building Arrays...	DONE
+	Time to build array: 		0.1738 seconds
+
+Before sorting...
+-----------------
+Testing Array of Integers: 		FAILED
+Performing Sequential Quicksort... 	DONE
+	Time to sort: 			1.8340 seconds
+Performing Parallel Quicksort... 	DONE
+	Time to sort: 			1.3955 seconds
+Performing std::sort()... 		DONE
+	Time to sort: 			0.0434 seconds
+
+After sorting...
+----------------
+Testing Array of Integers: 		PASSED
+
+	########################
+	Running for N = 10000000
+	########################
+
+Allocating Memory & Building Arrays...	DONE
+	Time to build array: 		1.3113 seconds
+
+Before sorting...
+-----------------
+Testing Array of Integers: 		FAILED
+Performing Sequential Quicksort... 	DONE
+	Time to sort: 			10.3029 seconds
+Performing Parallel Quicksort... 	DONE
+	Time to sort: 			9.4123 seconds
+Performing std::sort()... 		DONE
+	Time to sort: 			0.4610 seconds
+
+After sorting...
+----------------
+Testing Array of Integers: 		PASSED
+
+	#########################
+	Running for N = 100000000
+	#########################
+
+Allocating Memory & Building Arrays...	DONE
+	Time to build array: 		8.7909 seconds
+
+Before sorting...
+-----------------
+Testing Array of Integers: 		FAILED
+Performing Sequential Quicksort... 	DONE
+	Time to sort: 			96.0254 seconds
+Performing Parallel Quicksort... 	DONE
+	Time to sort: 			82.7487 seconds
+Performing std::sort()... 		DONE
+	Time to sort: 			5.8917 seconds
+
+After sorting...
+----------------
+Testing Array of Integers: 		PASSED
+
+	##########################
+	Running for N = 1000000000
+	##########################
+
+Allocating Memory & Building Arrays...	DONE
+	Time to build array: 		84.3939 seconds
+
+Before sorting...
+-----------------
+Testing Array of Integers: 		FAILED
+Performing Sequential Quicksort... 	DONE
+	Time to sort: 			1074.8919 seconds
+Performing Parallel Quicksort... 	DONE
+	Time to sort: 			627.3906 seconds
+Performing std::sort()... 		DONE
+	Time to sort: 			53.6135 seconds
+
+After sorting...
+----------------
+Testing Array of Integers: 		PASSED
+
+		TESTING GENERICSCAN
+
+	#######################
+	Running for N = 1000000
+	#######################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (0.01742 seconds)
+Performing Parallel Scan Operation........ DONE (0.01831 seconds)
+
+	########################
+	Running for N = 10000000
+	########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (0.20846 seconds)
+Performing Parallel Scan Operation........ DONE (0.20153 seconds)
+
+	#########################
+	Running for N = 100000000
+	#########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (1.43452 seconds)
+Performing Parallel Scan Operation........ DONE (1.55740 seconds)
+
+	##########################
+	Running for N = 1000000000
+	##########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (18.05360 seconds)
+Performing Parallel Scan Operation........ DONE (6.49543 seconds)
+
+
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+		PERFORMING TEST 2
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+		TESTING QUICKSORT
+
+	#######################
+	Running for N = 1000000
+	#######################
+
+Allocating Memory & Building Arrays...	DONE
+	Time to build array: 		0.1097 seconds
+
+Before sorting...
+-----------------
+Testing Array of Integers: 		FAILED
+Performing Sequential Quicksort... 	DONE
+	Time to sort: 			0.9981 seconds
+Performing Parallel Quicksort... 	DONE
+	Time to sort: 			0.7801 seconds
+Performing std::sort()... 		DONE
+	Time to sort: 			0.0512 seconds
+
+After sorting...
+----------------
+Testing Array of Integers: 		PASSED
+
+	########################
+	Running for N = 10000000
+	########################
+
+Allocating Memory & Building Arrays...	DONE
+	Time to build array: 		0.8549 seconds
+
+Before sorting...
+-----------------
+Testing Array of Integers: 		FAILED
+Performing Sequential Quicksort... 	DONE
+	Time to sort: 			9.8926 seconds
+Performing Parallel Quicksort... 	DONE
+	Time to sort: 			10.2098 seconds
+Performing std::sort()... 		DONE
+	Time to sort: 			0.8169 seconds
+
+After sorting...
+----------------
+Testing Array of Integers: 		PASSED
+
+	#########################
+	Running for N = 100000000
+	#########################
+
+Allocating Memory & Building Arrays...	DONE
+	Time to build array: 		8.8612 seconds
+
+Before sorting...
+-----------------
+Testing Array of Integers: 		FAILED
+Performing Sequential Quicksort... 	DONE
+	Time to sort: 			96.4855 seconds
+Performing Parallel Quicksort... 	DONE
+	Time to sort: 			88.2152 seconds
+Performing std::sort()... 		DONE
+	Time to sort: 			5.0427 seconds
+
+After sorting...
+----------------
+Testing Array of Integers: 		PASSED
+
+	##########################
+	Running for N = 1000000000
+	##########################
+
+Allocating Memory & Building Arrays...	DONE
+	Time to build array: 		83.2522 seconds
+
+Before sorting...
+-----------------
+Testing Array of Integers: 		FAILED
+Performing Sequential Quicksort... 	DONE
+	Time to sort: 			991.3301 seconds
+Performing Parallel Quicksort... 	DONE
+	Time to sort: 			932.2762 seconds
+Performing std::sort()... 		DONE
+	Time to sort: 			52.5402 seconds
+
+After sorting...
+----------------
+Testing Array of Integers: 		PASSED
+
+		TESTING GENERICSCAN
+
+	#######################
+	Running for N = 1000000
+	#######################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (0.01863 seconds)
+Performing Parallel Scan Operation........ DONE (0.01850 seconds)
+
+	########################
+	Running for N = 10000000
+	########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (0.21102 seconds)
+Performing Parallel Scan Operation........ DONE (0.21384 seconds)
+
+	#########################
+	Running for N = 100000000
+	#########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (1.44166 seconds)
+Performing Parallel Scan Operation........ DONE (1.52689 seconds)
+
+	##########################
+	Running for N = 1000000000
+	##########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (15.66403 seconds)
+Performing Parallel Scan Operation........ DONE (7.77486 seconds)
+
+
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+		PERFORMING TEST 3
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+		TESTING QUICKSORT
+
+	#######################
+	Running for N = 1000000
+	#######################
+
+Allocating Memory & Building Arrays...	DONE
+	Time to build array: 		0.1132 seconds
+
+Before sorting...
+-----------------
+Testing Array of Integers: 		FAILED
+Performing Sequential Quicksort... 	DONE
+	Time to sort: 			1.0445 seconds
+Performing Parallel Quicksort... 	DONE
+	Time to sort: 			0.7411 seconds
+Performing std::sort()... 		DONE
+	Time to sort: 			0.0434 seconds
+
+After sorting...
+----------------
+Testing Array of Integers: 		PASSED
+
+	########################
+	Running for N = 10000000
+	########################
+
+Allocating Memory & Building Arrays...	DONE
+	Time to build array: 		0.8556 seconds
+
+Before sorting...
+-----------------
+Testing Array of Integers: 		FAILED
+Performing Sequential Quicksort... 	DONE
+	Time to sort: 			10.0138 seconds
+Performing Parallel Quicksort... 	DONE
+	Time to sort: 			10.1194 seconds
+Performing std::sort()... 		DONE
+	Time to sort: 			0.4878 seconds
+
+After sorting...
+----------------
+Testing Array of Integers: 		PASSED
+
+	#########################
+	Running for N = 100000000
+	#########################
+
+Allocating Memory & Building Arrays...	DONE
+	Time to build array: 		8.8977 seconds
+
+Before sorting...
+-----------------
+Testing Array of Integers: 		FAILED
+Performing Sequential Quicksort... 	DONE
+	Time to sort: 			96.3905 seconds
+Performing Parallel Quicksort... 	DONE
+	Time to sort: 			86.0780 seconds
+Performing std::sort()... 		DONE
+	Time to sort: 			5.7975 seconds
+
+After sorting...
+----------------
+Testing Array of Integers: 		PASSED
+
+	##########################
+	Running for N = 1000000000
+	##########################
+
+Allocating Memory & Building Arrays...	DONE
+	Time to build array: 		84.4632 seconds
+
+Before sorting...
+-----------------
+Testing Array of Integers: 		FAILED
+Performing Sequential Quicksort... 	DONE
+	Time to sort: 			1004.0136 seconds
+Performing Parallel Quicksort... 	DONE
+	Time to sort: 			832.9832 seconds
+Performing std::sort()... 		DONE
+	Time to sort: 			55.7862 seconds
+
+After sorting...
+----------------
+Testing Array of Integers: 		PASSED
+
+		TESTING GENERICSCAN
+
+	#######################
+	Running for N = 1000000
+	#######################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (0.01703 seconds)
+Performing Parallel Scan Operation........ DONE (0.01791 seconds)
+
+	########################
+	Running for N = 10000000
+	########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (0.20972 seconds)
+Performing Parallel Scan Operation........ DONE (0.20479 seconds)
+
+	#########################
+	Running for N = 100000000
+	#########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (1.43000 seconds)
+Performing Parallel Scan Operation........ DONE (1.55241 seconds)
+
+	##########################
+	Running for N = 1000000000
+	##########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (18.22449 seconds)
+Performing Parallel Scan Operation........ DONE (7.79598 seconds)
+
+
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+		PERFORMING TEST 4
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+		TESTING QUICKSORT
+
+	#######################
+	Running for N = 1000000
+	#######################
+
+Allocating Memory & Building Arrays...	DONE
+	Time to build array: 		0.1185 seconds
+
+Before sorting...
+-----------------
+Testing Array of Integers: 		FAILED
+Performing Sequential Quicksort... 	DONE
+	Time to sort: 			1.0247 seconds
+Performing Parallel Quicksort... 	DONE
+	Time to sort: 			0.8122 seconds
+Performing std::sort()... 		DONE
+	Time to sort: 			0.0506 seconds
+
+After sorting...
+----------------
+Testing Array of Integers: 		PASSED
+
+	########################
+	Running for N = 10000000
+	########################
+
+Allocating Memory & Building Arrays...	DONE
+	Time to build array: 		0.8229 seconds
+
+Before sorting...
+-----------------
+Testing Array of Integers: 		FAILED
+Performing Sequential Quicksort... 	DONE
+	Time to sort: 			9.6974 seconds
+Performing Parallel Quicksort... 	DONE
+	Time to sort: 			8.4341 seconds
+Performing std::sort()... 		DONE
+	Time to sort: 			0.5263 seconds
+
+After sorting...
+----------------
+Testing Array of Integers: 		PASSED
+
+	#########################
+	Running for N = 100000000
+	#########################
+
+Allocating Memory & Building Arrays...	DONE
+	Time to build array: 		8.3529 seconds
+
+Before sorting...
+-----------------
+Testing Array of Integers: 		FAILED
+Performing Sequential Quicksort... 	DONE
+	Time to sort: 			95.0413 seconds
+Performing Parallel Quicksort... 	DONE
+	Time to sort: 			85.7089 seconds
+Performing std::sort()... 		DONE
+	Time to sort: 			5.8254 seconds
+
+After sorting...
+----------------
+Testing Array of Integers: 		PASSED
+
+	##########################
+	Running for N = 1000000000
+	##########################
+
+Allocating Memory & Building Arrays...	DONE
+	Time to build array: 		82.5512 seconds
+
+Before sorting...
+-----------------
+Testing Array of Integers: 		FAILED
+Performing Sequential Quicksort... 	DONE
+	Time to sort: 			1010.4615 seconds
+Performing Parallel Quicksort... 	DONE
+	Time to sort: 			617.2268 seconds
+Performing std::sort()... 		DONE
+	Time to sort: 			52.7794 seconds
+
+After sorting...
+----------------
+Testing Array of Integers: 		PASSED
+
+		TESTING GENERICSCAN
+
+	#######################
+	Running for N = 1000000
+	#######################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (0.01562 seconds)
+Performing Parallel Scan Operation........ DONE (0.01630 seconds)
+
+	########################
+	Running for N = 10000000
+	########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (0.19666 seconds)
+Performing Parallel Scan Operation........ DONE (0.18977 seconds)
+
+	#########################
+	Running for N = 100000000
+	#########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (1.43181 seconds)
+Performing Parallel Scan Operation........ DONE (1.51727 seconds)
+
+	##########################
+	Running for N = 1000000000
+	##########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (17.75299 seconds)
+Performing Parallel Scan Operation........ DONE (7.70094 seconds)
+
+
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+		PERFORMING TEST 5
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+		TESTING QUICKSORT
+
+	#######################
+	Running for N = 1000000
+	#######################
+
+Allocating Memory & Building Arrays...	DONE
+	Time to build array: 		0.1139 seconds
+
+Before sorting...
+-----------------
+Testing Array of Integers: 		FAILED
+Performing Sequential Quicksort... 	DONE
+	Time to sort: 			1.0050 seconds
+Performing Parallel Quicksort... 	DONE
+	Time to sort: 			1.0011 seconds
+Performing std::sort()... 		DONE
+	Time to sort: 			0.0512 seconds
+
+After sorting...
+----------------
+Testing Array of Integers: 		PASSED
+
+	########################
+	Running for N = 10000000
+	########################
+
+Allocating Memory & Building Arrays...	DONE
+	Time to build array: 		0.8837 seconds
+
+Before sorting...
+-----------------
+Testing Array of Integers: 		FAILED
+Performing Sequential Quicksort... 	DONE
+	Time to sort: 			9.7113 seconds
+Performing Parallel Quicksort... 	DONE
+	Time to sort: 			5.8413 seconds
+Performing std::sort()... 		DONE
+	Time to sort: 			0.5169 seconds
+
+After sorting...
+----------------
+Testing Array of Integers: 		PASSED
+
+	#########################
+	Running for N = 100000000
+	#########################
+
+Allocating Memory & Building Arrays...	DONE
+	Time to build array: 		8.4939 seconds
+
+Before sorting...
+-----------------
+Testing Array of Integers: 		FAILED
+Performing Sequential Quicksort... 	DONE
+	Time to sort: 			96.5264 seconds
+Performing Parallel Quicksort... 	DONE
+	Time to sort: 			69.3667 seconds
+Performing std::sort()... 		DONE
+	Time to sort: 			5.0245 seconds
+
+After sorting...
+----------------
+Testing Array of Integers: 		PASSED
+
+	##########################
+	Running for N = 1000000000
+	##########################
+
+Allocating Memory & Building Arrays...	DONE
+	Time to build array: 		82.9849 seconds
+
+Before sorting...
+-----------------
+Testing Array of Integers: 		FAILED
+Performing Sequential Quicksort... 	DONE
+	Time to sort: 			980.1201 seconds
+Performing Parallel Quicksort... 	DONE
+	Time to sort: 			673.0402 seconds
+Performing std::sort()... 		DONE
+	Time to sort: 			57.0018 seconds
+
+After sorting...
+----------------
+Testing Array of Integers: 		PASSED
+
+		TESTING GENERICSCAN
+
+	#######################
+	Running for N = 1000000
+	#######################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (0.01715 seconds)
+Performing Parallel Scan Operation........ DONE (0.01840 seconds)
+
+	########################
+	Running for N = 10000000
+	########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (0.20635 seconds)
+Performing Parallel Scan Operation........ DONE (0.20081 seconds)
+
+	#########################
+	Running for N = 100000000
+	#########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (2.04874 seconds)
+Performing Parallel Scan Operation........ DONE (1.70575 seconds)
+
+	##########################
+	Running for N = 1000000000
+	##########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (17.82510 seconds)
+Performing Parallel Scan Operation........ DONE (7.03143 seconds)
+
+
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+		PERFORMING TEST 6
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+		TESTING QUICKSORT
+
+	#######################
+	Running for N = 1000000
+	#######################
+
+Allocating Memory & Building Arrays...	DONE
+	Time to build array: 		0.1170 seconds
+
+Before sorting...
+-----------------
+Testing Array of Integers: 		FAILED
+Performing Sequential Quicksort... 	DONE
+	Time to sort: 			0.9993 seconds
+Performing Parallel Quicksort... 	DONE
+	Time to sort: 			0.8659 seconds
+Performing std::sort()... 		DONE
+	Time to sort: 			0.0512 seconds
+
+After sorting...
+----------------
+Testing Array of Integers: 		PASSED
+
+	########################
+	Running for N = 10000000
+	########################
+
+Allocating Memory & Building Arrays...	DONE
+	Time to build array: 		0.8618 seconds
+
+Before sorting...
+-----------------
+Testing Array of Integers: 		FAILED
+Performing Sequential Quicksort... 	DONE
+	Time to sort: 			9.4407 seconds
+Performing Parallel Quicksort... 	DONE
+	Time to sort: 			8.2296 seconds
+Performing std::sort()... 		DONE
+	Time to sort: 			0.7193 seconds
+
+After sorting...
+----------------
+Testing Array of Integers: 		PASSED
+
+	#########################
+	Running for N = 100000000
+	#########################
+
+Allocating Memory & Building Arrays...	DONE
+	Time to build array: 		8.6446 seconds
+
+Before sorting...
+-----------------
+Testing Array of Integers: 		FAILED
+Performing Sequential Quicksort... 	DONE
+	Time to sort: 			95.8888 seconds
+Performing Parallel Quicksort... 	DONE
+	Time to sort: 			54.4803 seconds
+Performing std::sort()... 		DONE
+	Time to sort: 			5.8762 seconds
+
+After sorting...
+----------------
+Testing Array of Integers: 		PASSED
+
+	##########################
+	Running for N = 1000000000
+	##########################
+
+Allocating Memory & Building Arrays...	DONE
+	Time to build array: 		84.0151 seconds
+
+Before sorting...
+-----------------
+Testing Array of Integers: 		FAILED
+Performing Sequential Quicksort... 	DONE
+	Time to sort: 			983.2547 seconds
+Performing Parallel Quicksort... 	DONE
+	Time to sort: 			573.0375 seconds
+Performing std::sort()... 		DONE
+	Time to sort: 			53.3812 seconds
+
+After sorting...
+----------------
+Testing Array of Integers: 		PASSED
+
+		TESTING GENERICSCAN
+
+	#######################
+	Running for N = 1000000
+	#######################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (0.01840 seconds)
+Performing Parallel Scan Operation........ DONE (0.01844 seconds)
+
+	########################
+	Running for N = 10000000
+	########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (0.21174 seconds)
+Performing Parallel Scan Operation........ DONE (0.22314 seconds)
+
+	#########################
+	Running for N = 100000000
+	#########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (1.51809 seconds)
+Performing Parallel Scan Operation........ DONE (1.50315 seconds)
+
+	##########################
+	Running for N = 1000000000
+	##########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (17.77319 seconds)
+Performing Parallel Scan Operation........ DONE (7.81886 seconds)
+
+
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+		PERFORMING TEST 7
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+		TESTING QUICKSORT
+
+	#######################
+	Running for N = 1000000
+	#######################
+
+Allocating Memory & Building Arrays...	DONE
+	Time to build array: 		0.1138 seconds
+
+Before sorting...
+-----------------
+Testing Array of Integers: 		FAILED
+Performing Sequential Quicksort... 	DONE
+	Time to sort: 			1.0447 seconds
+Performing Parallel Quicksort... 	DONE
+	Time to sort: 			1.0494 seconds
+Performing std::sort()... 		DONE
+	Time to sort: 			0.0486 seconds
+
+After sorting...
+----------------
+Testing Array of Integers: 		PASSED
+
+	########################
+	Running for N = 10000000
+	########################
+
+Allocating Memory & Building Arrays...	DONE
+	Time to build array: 		0.8723 seconds
+
+Before sorting...
+-----------------
+Testing Array of Integers: 		FAILED
+Performing Sequential Quicksort... 	DONE
+	Time to sort: 			9.5793 seconds
+Performing Parallel Quicksort... 	DONE
+	Time to sort: 			5.4277 seconds
+Performing std::sort()... 		DONE
+	Time to sort: 			0.4640 seconds
+
+After sorting...
+----------------
+Testing Array of Integers: 		PASSED
+
+	#########################
+	Running for N = 100000000
+	#########################
+
+Allocating Memory & Building Arrays...	DONE
+	Time to build array: 		8.5017 seconds
+
+Before sorting...
+-----------------
+Testing Array of Integers: 		FAILED
+Performing Sequential Quicksort... 	DONE
+	Time to sort: 			97.8993 seconds
+Performing Parallel Quicksort... 	DONE
+	Time to sort: 			80.5974 seconds
+Performing std::sort()... 		DONE
+	Time to sort: 			6.0185 seconds
+
+After sorting...
+----------------
+Testing Array of Integers: 		PASSED
+
+	##########################
+	Running for N = 1000000000
+	##########################
+
+Allocating Memory & Building Arrays...	DONE
+	Time to build array: 		83.6590 seconds
+
+Before sorting...
+-----------------
+Testing Array of Integers: 		FAILED
+Performing Sequential Quicksort... 	DONE
+	Time to sort: 			1025.1439 seconds
+Performing Parallel Quicksort... 	DONE
+	Time to sort: 			821.5173 seconds
+Performing std::sort()... 		DONE
+	Time to sort: 			54.7706 seconds
+
+After sorting...
+----------------
+Testing Array of Integers: 		PASSED
+
+		TESTING GENERICSCAN
+
+	#######################
+	Running for N = 1000000
+	#######################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (0.01814 seconds)
+Performing Parallel Scan Operation........ DONE (0.01729 seconds)
+
+	########################
+	Running for N = 10000000
+	########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (0.22934 seconds)
+Performing Parallel Scan Operation........ DONE (0.24323 seconds)
+
+	#########################
+	Running for N = 100000000
+	#########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (1.44247 seconds)
+Performing Parallel Scan Operation........ DONE (1.52273 seconds)
+
+	##########################
+	Running for N = 1000000000
+	##########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (17.82661 seconds)
+Performing Parallel Scan Operation........ DONE (6.17713 seconds)
+
+
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+		PERFORMING TEST 8
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+		TESTING QUICKSORT
+
+	#######################
+	Running for N = 1000000
+	#######################
+
+Allocating Memory & Building Arrays...	DONE
+	Time to build array: 		0.1152 seconds
+
+Before sorting...
+-----------------
+Testing Array of Integers: 		FAILED
+Performing Sequential Quicksort... 	DONE
+	Time to sort: 			1.0323 seconds
+Performing Parallel Quicksort... 	DONE
+	Time to sort: 			0.9087 seconds
+Performing std::sort()... 		DONE
+	Time to sort: 			0.0513 seconds
+
+After sorting...
+----------------
+Testing Array of Integers: 		PASSED
+
+	########################
+	Running for N = 10000000
+	########################
+
+Allocating Memory & Building Arrays...	DONE
+	Time to build array: 		0.8675 seconds
+
+Before sorting...
+-----------------
+Testing Array of Integers: 		FAILED
+Performing Sequential Quicksort... 	DONE
+	Time to sort: 			9.6725 seconds
+Performing Parallel Quicksort... 	DONE
+	Time to sort: 			9.8198 seconds
+Performing std::sort()... 		DONE
+	Time to sort: 			0.5620 seconds
+
+After sorting...
+----------------
+Testing Array of Integers: 		PASSED
+
+	#########################
+	Running for N = 100000000
+	#########################
+
+Allocating Memory & Building Arrays...	DONE
+	Time to build array: 		8.8387 seconds
+
+Before sorting...
+-----------------
+Testing Array of Integers: 		FAILED
+Performing Sequential Quicksort... 	DONE
+	Time to sort: 			103.7943 seconds
+Performing Parallel Quicksort... 	DONE
+	Time to sort: 			65.5989 seconds
+Performing std::sort()... 		DONE
+	Time to sort: 			6.0346 seconds
+
+After sorting...
+----------------
+Testing Array of Integers: 		PASSED
+
+	##########################
+	Running for N = 1000000000
+	##########################
+
+Allocating Memory & Building Arrays...	DONE
+	Time to build array: 		83.6434 seconds
+
+Before sorting...
+-----------------
+Testing Array of Integers: 		FAILED
+Performing Sequential Quicksort... 	DONE
+	Time to sort: 			976.7966 seconds
+Performing Parallel Quicksort... 	DONE
+	Time to sort: 			897.5483 seconds
+Performing std::sort()... 		DONE
+	Time to sort: 			53.6152 seconds
+
+After sorting...
+----------------
+Testing Array of Integers: 		PASSED
+
+		TESTING GENERICSCAN
+
+	#######################
+	Running for N = 1000000
+	#######################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (0.01670 seconds)
+Performing Parallel Scan Operation........ DONE (0.01685 seconds)
+
+	########################
+	Running for N = 10000000
+	########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (0.19826 seconds)
+Performing Parallel Scan Operation........ DONE (0.24170 seconds)
+
+	#########################
+	Running for N = 100000000
+	#########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (1.44972 seconds)
+Performing Parallel Scan Operation........ DONE (1.33804 seconds)
+
+	##########################
+	Running for N = 1000000000
+	##########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (19.27986 seconds)
+Performing Parallel Scan Operation........ DONE (8.11214 seconds)
+
+
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+		PERFORMING TEST 9
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+		TESTING QUICKSORT
+
+	#######################
+	Running for N = 1000000
+	#######################
+
+Allocating Memory & Building Arrays...	DONE
+	Time to build array: 		0.1245 seconds
+
+Before sorting...
+-----------------
+Testing Array of Integers: 		FAILED
+Performing Sequential Quicksort... 	DONE
+	Time to sort: 			1.1017 seconds
+Performing Parallel Quicksort... 	DONE
+	Time to sort: 			0.7123 seconds
+Performing std::sort()... 		DONE
+	Time to sort: 			0.0511 seconds
+
+After sorting...
+----------------
+Testing Array of Integers: 		PASSED
+
+	########################
+	Running for N = 10000000
+	########################
+
+Allocating Memory & Building Arrays...	DONE
+	Time to build array: 		0.9404 seconds
+
+Before sorting...
+-----------------
+Testing Array of Integers: 		FAILED
+Performing Sequential Quicksort... 	DONE
+	Time to sort: 			9.9020 seconds
+Performing Parallel Quicksort... 	DONE
+	Time to sort: 			5.6493 seconds
+Performing std::sort()... 		DONE
+	Time to sort: 			0.4736 seconds
+
+After sorting...
+----------------
+Testing Array of Integers: 		PASSED
+
+	#########################
+	Running for N = 100000000
+	#########################
+
+Allocating Memory & Building Arrays...	DONE
+	Time to build array: 		9.0045 seconds
+
+Before sorting...
+-----------------
+Testing Array of Integers: 		FAILED
+Performing Sequential Quicksort... 	DONE
+	Time to sort: 			97.1059 seconds
+Performing Parallel Quicksort... 	DONE
+	Time to sort: 			53.5881 seconds
+Performing std::sort()... 		DONE
+	Time to sort: 			5.8055 seconds
+
+After sorting...
+----------------
+Testing Array of Integers: 		PASSED
+
+	##########################
+	Running for N = 1000000000
+	##########################
+
+Allocating Memory & Building Arrays...	DONE
+	Time to build array: 		90.6144 seconds
+
+Before sorting...
+-----------------
+Testing Array of Integers: 		FAILED
+Performing Sequential Quicksort... 	DONE
+	Time to sort: 			1000.6518 seconds
+Performing Parallel Quicksort... 	DONE
+	Time to sort: 			716.3525 seconds
+Performing std::sort()... 		DONE
+	Time to sort: 			52.7896 seconds
+
+After sorting...
+----------------
+Testing Array of Integers: 		PASSED
+
+		TESTING GENERICSCAN
+
+	#######################
+	Running for N = 1000000
+	#######################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (0.01737 seconds)
+Performing Parallel Scan Operation........ DONE (0.01741 seconds)
+
+	########################
+	Running for N = 10000000
+	########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (0.20576 seconds)
+Performing Parallel Scan Operation........ DONE (0.21079 seconds)
+
+	#########################
+	Running for N = 100000000
+	#########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (1.45078 seconds)
+Performing Parallel Scan Operation........ DONE (1.58002 seconds)
+
+	##########################
+	Running for N = 1000000000
+	##########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (17.73699 seconds)
+Performing Parallel Scan Operation........ DONE (7.81747 seconds)
+
+
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+		PERFORMING TEST 10
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+		TESTING QUICKSORT
+
+	#######################
+	Running for N = 1000000
+	#######################
+
+Allocating Memory & Building Arrays...	DONE
+	Time to build array: 		0.1287 seconds
+
+Before sorting...
+-----------------
+Testing Array of Integers: 		FAILED
+Performing Sequential Quicksort... 	DONE
+	Time to sort: 			1.0238 seconds
+Performing Parallel Quicksort... 	DONE
+	Time to sort: 			0.9969 seconds
+Performing std::sort()... 		DONE
+	Time to sort: 			0.0512 seconds
+
+After sorting...
+----------------
+Testing Array of Integers: 		PASSED
+
+	########################
+	Running for N = 10000000
+	########################
+
+Allocating Memory & Building Arrays...	DONE
+	Time to build array: 		0.8765 seconds
+
+Before sorting...
+-----------------
+Testing Array of Integers: 		FAILED
+Performing Sequential Quicksort... 	DONE
+	Time to sort: 			9.5105 seconds
+Performing Parallel Quicksort... 	DONE
+	Time to sort: 			6.8460 seconds
+Performing std::sort()... 		DONE
+	Time to sort: 			0.4783 seconds
+
+After sorting...
+----------------
+Testing Array of Integers: 		PASSED
+
+	#########################
+	Running for N = 100000000
+	#########################
+
+Allocating Memory & Building Arrays...	DONE
+	Time to build array: 		8.8796 seconds
+
+Before sorting...
+-----------------
+Testing Array of Integers: 		FAILED
+Performing Sequential Quicksort... 	DONE
+	Time to sort: 			98.3559 seconds
+Performing Parallel Quicksort... 	DONE
+	Time to sort: 			77.2915 seconds
+Performing std::sort()... 		DONE
+	Time to sort: 			5.6395 seconds
+
+After sorting...
+----------------
+Testing Array of Integers: 		PASSED
+
+	##########################
+	Running for N = 1000000000
+	##########################
+
+Allocating Memory & Building Arrays...	DONE
+	Time to build array: 		83.8643 seconds
+
+Before sorting...
+-----------------
+Testing Array of Integers: 		FAILED
+Performing Sequential Quicksort... 	DONE
+	Time to sort: 			968.1812 seconds
+Performing Parallel Quicksort... 	DONE
+	Time to sort: 			587.3137 seconds
+Performing std::sort()... 		DONE
+	Time to sort: 			52.5698 seconds
+
+After sorting...
+----------------
+Testing Array of Integers: 		PASSED
+
+		TESTING GENERICSCAN
+
+	#######################
+	Running for N = 1000000
+	#######################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (0.01697 seconds)
+Performing Parallel Scan Operation........ DONE (0.01703 seconds)
+
+	########################
+	Running for N = 10000000
+	########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (0.19914 seconds)
+Performing Parallel Scan Operation........ DONE (0.20271 seconds)
+
+	#########################
+	Running for N = 100000000
+	#########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (1.44065 seconds)
+Performing Parallel Scan Operation........ DONE (1.60781 seconds)
+
+	##########################
+	Running for N = 1000000000
+	##########################
+Allocating Array.......................... DONE
+Building the Array........................ DONE
+Performing Sequential Scan Operation...... DONE (17.65407 seconds)
+Performing Parallel Scan Operation........ DONE (7.77837 seconds)

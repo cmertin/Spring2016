@@ -1,0 +1,27 @@
+File: quicksort.cpp
+===================
+
+This file implements a generalized version of quicksort which works with the
+following types of datatypes: integers, longs, floats, doubles, and an included
+datatype that is defined as a "Point." The Point datatype consists of an x and y
+value, which would be relatable to that being seen in Cartesian space.
+
+In implementing Quicksort, both "ascending" and "descending" orientations were
+defined in the file, such that either one can be used. This can be changed in
+the file by changing the string "ordering" to be either
+{"ascending", "descending"}. It does have checks in place such that it should
+catch any errors that are made in this ordering.
+
+In the sorting of the "points," it is first done by looking at the y-values. If
+the y-values are equal, then it looks at the x-values to "break the tie" between
+the two points when it comes to ordering them.
+
+To compile the program, either run the `Makefile`, or simply run
+`g++ -std=c++11 -O2 -o quicksort quicksort.cpp` and it will compile it to an
+executable called "quicksort" which can then be ran via the command line. The
+program randomly generates a list of arrays of random values with the use of
+the `rand()` function in `C++`. It then calls the `QuickSort` function which
+sorts the array. The `QuickSort` function does depend on defining a function
+to compare the data-structure. If it is properly ordered, the comparison
+function should return `1` and it should return `-1` if the two terms that are
+being compared are out of order.

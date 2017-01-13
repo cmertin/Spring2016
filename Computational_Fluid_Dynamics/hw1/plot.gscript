@@ -1,0 +1,53 @@
+#!/bin/sh
+gnuplot -persist << PLOT
+set terminal pdf color enhanced
+set output "CD.pdf"
+set xlabel "x"
+set ylabel "f'(x)"
+set title "Central Difference Approximation"
+set xrange [0:1]
+plot 'output_data_fnP_exact.dat' w lines title "f'(x) exact", 'output_data_CD_h_0.1.dat' w lines title "h = 0.1", 'output_data_CD_h_0.01.dat' w lines title "h = 0.01", 'output_data_CD_h_0.001.dat' w lines title "h = 0.001"
+
+set terminal pdf color enhanced
+set output "FWD.pdf"
+set xlabel "x"
+set ylabel "f'(x)"
+set title "Forward Difference Approximation"
+set xrange [0:1]
+plot 'output_data_fnP_exact.dat' w lines title "f'(x) exact", 'output_data_FWD_h_0.1.dat' w lines title "h = 0.1", 'output_data_FWD_h_0.01.dat' w lines title "h = 0.01", 'output_data_FWD_h_0.001.dat' w lines title "h = 0.001"
+
+set terminal pdf color enhanced
+set output "CD2.pdf"
+set xlabel "x"
+set ylabel "f''(x)"
+set title "Central Difference Approximation"
+set xrange [0:1]
+plot 'output_data_fnPP_exact.dat' w lines title "f''(x) exact", 'output_data_CD2_h_0.1.dat' w lines title "h = 0.1", 'output_data_CD2_h_0.01.dat' w lines title "h = 0.01", 'output_data_CD2_h_0.001.dat' w lines title "h = 0.001"
+
+set terminal pdf color enhanced
+set output "CD_error.pdf"
+set xlabel "x"
+set ylabel "{/Symbol e}_{r}"
+set logscale y
+set title "Central Difference Relative Error for f'(x)"
+plot 'output_error_fnP_CD_h_0.1.dat' using 1:4 w lines title "h = 0.1", 'output_error_fnP_CD_h_0.01.dat' using 1:4 w lines title "h = 0.01", 'output_error_fnP_CD_h_0.001.dat' using 1:4 w lines title "h = 0.001"
+
+set terminal pdf color enhanced
+set output "FWD_error.pdf"
+set xlabel "x"
+set ylabel "{/Symbol e}_{r}"
+set logscale y
+set title "Foward Difference Relative Error for f'(x)"
+plot 'output_error_fnP_FWD_h_0.1.dat' using 1:4 w lines title "h = 0.1", 'output_error_fnP_FWD_h_0.01.dat' using 1:4 w lines title "h = 0.01", 'output_error_fnP_FWD_h_0.001.dat' using 1:4 w lines title "h = 0.001"
+
+set terminal pdf color enhanced
+set output "CD2_error.pdf"
+set xlabel "x"
+set ylabel "{/Symbol e}_{r}"
+set logscale y
+set title "Central Difference Relative Error for f''(x)"
+plot 'output_error_fnPP_CD2_h_0.1.dat' using 1:4 w lines title "h = 0.1", 'output_error_fnPP_CD2_h_0.01.dat' using 1:4 w lines title "h = 0.01", 'output_error_fnPP_CD2_h_0.001.dat' using 1:4 w lines title "h = 0.001"
+
+PLOT
+
+

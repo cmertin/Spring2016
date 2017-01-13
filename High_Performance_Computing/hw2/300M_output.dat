@@ -1,0 +1,100 @@
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+		PERFORMING TEST 1
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+Testing cases for 1D and 3D doubles (300,000,000)
+Allocating Array.......................... DONE
+Building Array............................ DONE
+Performing 1D Sequential Scan............ Done (4.18990 seconds)
+Performing 1D Parallel Scan.............. Done (2.97807 seconds)
+Performing 3D Sequential Scan............ Done (10.20838 seconds)
+Performing 3D Parallel Scan.............. Done (5.11987 seconds)
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+		PERFORMING TEST 2
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+Testing cases for 1D and 3D doubles (300,000,000)
+Allocating Array.......................... DONE
+Building Array............................ DONE
+Performing 1D Sequential Scan............ Done (5.26524 seconds)
+Performing 1D Parallel Scan.............. Done (3.17811 seconds)
+Performing 3D Sequential Scan............ Done (10.54990 seconds)
+Performing 3D Parallel Scan.............. Done (5.24736 seconds)
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+		PERFORMING TEST 3
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+Testing cases for 1D and 3D doubles (300,000,000)
+Allocating Array.......................... DONE
+Building Array............................ DONE
+Performing 1D Sequential Scan............ Done (4.27413 seconds)
+Performing 1D Parallel Scan.............. Done (2.94642 seconds)
+Performing 3D Sequential Scan............ Done (10.59018 seconds)
+Performing 3D Parallel Scan.............. Done (5.13064 seconds)
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+		PERFORMING TEST 4
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+Testing cases for 1D and 3D doubles (300,000,000)
+Allocating Array.......................... DONE
+Building Array............................ DONE
+Performing 1D Sequential Scan............ Done (4.24862 seconds)
+Performing 1D Parallel Scan.............. Done (3.05233 seconds)
+Performing 3D Sequential Scan............ Done (10.36713 seconds)
+Performing 3D Parallel Scan.............. Done (5.13688 seconds)
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+		PERFORMING TEST 5
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+Testing cases for 1D and 3D doubles (300,000,000)
+Allocating Array.......................... DONE
+Building Array............................ DONE
+Performing 1D Sequential Scan............ Done (4.27546 seconds)
+Performing 1D Parallel Scan.............. Done (2.94241 seconds)
+Performing 3D Sequential Scan............ Done (10.50324 seconds)
+Performing 3D Parallel Scan.............. Done (5.19195 seconds)
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+		PERFORMING TEST 6
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+Testing cases for 1D and 3D doubles (300,000,000)
+Allocating Array.......................... DONE
+Building Array............................ DONE
+Performing 1D Sequential Scan............ Done (4.25921 seconds)
+Performing 1D Parallel Scan.............. Done (3.02857 seconds)
+Performing 3D Sequential Scan............ Done (10.34337 seconds)
+Performing 3D Parallel Scan.............. Done (5.14977 seconds)
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+		PERFORMING TEST 7
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+Testing cases for 1D and 3D doubles (300,000,000)
+Allocating Array.......................... DONE
+Building Array............................ DONE
+Performing 1D Sequential Scan............ Done (5.29733 seconds)
+Performing 1D Parallel Scan.............. Done (3.23137 seconds)
+Performing 3D Sequential Scan............ Done (10.38454 seconds)
+Performing 3D Parallel Scan.............. Done (5.24970 seconds)
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+		PERFORMING TEST 8
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+Testing cases for 1D and 3D doubles (300,000,000)
+Allocating Array.......................... DONE
+Building Array............................ DONE
+Performing 1D Sequential Scan............ Done (5.29348 seconds)
+Performing 1D Parallel Scan.............. Done (3.12709 seconds)
+Performing 3D Sequential Scan............ Done (10.54377 seconds)
+Performing 3D Parallel Scan.............. Done (5.27591 seconds)
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+		PERFORMING TEST 9
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+Testing cases for 1D and 3D doubles (300,000,000)
+Allocating Array.......................... DONE
+Building Array............................ DONE
+Performing 1D Sequential Scan............ Done (4.27366 seconds)
+Performing 1D Parallel Scan.............. Done (2.95331 seconds)
+Performing 3D Sequential Scan............ Done (10.65853 seconds)
+Performing 3D Parallel Scan.............. Done (5.24457 seconds)
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+		PERFORMING TEST 10
+	$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+Testing cases for 1D and 3D doubles (300,000,000)
+Allocating Array.......................... DONE
+Building Array............................ DONE
+Performing 1D Sequential Scan............ Done (4.23319 seconds)
+Performing 1D Parallel Scan.............. Done (2.88946 seconds)
+Performing 3D Sequential Scan............ Done (11.10843 seconds)
+Performing 3D Parallel Scan.............. Done (5.25821 seconds)
